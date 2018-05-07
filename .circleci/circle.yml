@@ -6,12 +6,12 @@ jobs:
       - image: circleci/android:api-27-alpha
     environment:
       JVM_OPTS: -Xmx3200m
-      override:
-          - echo y | android update sdk --no-ui --all --filter build-tools-27.0.3,android-27
     steps:
       - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run: sdkmanager --install "build-tools-27.0.3;android-27"
+      - run: sdkmanager --licenses
       - run:
          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
          command: sudo chmod +x ./gradlew
