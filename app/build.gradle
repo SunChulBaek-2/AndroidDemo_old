@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+Properties build = new Properties()
+build.load(new FileInputStream(project.file("build.properties")))
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        println "[x1210x] versionCode = ${Integer.valueOf(build.getProperty("versionCode"))}"
+        println "[x1210x] versionName = ${build.getProperty("versionName")}"
+
+        applicationId "ssun.pe.kr.androiddemo"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode Integer.valueOf(build.getProperty("versionCode"))
+        versionName build.getProperty("versionName")
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${rootProject.kotlin_version}"
+    // Support Libraries
+    implementation "com.android.support:appcompat-v7:${rootProject.support}"
+    implementation "com.android.support.constraint:constraint-layout:${rootProject.support_constraint}"
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:${rootProject.rxjava}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxandroid}"
+    implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.rxkotlin}"
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.retrofit}"
+    // Glide
+    implementation "com.github.bumptech.glide:glide:${rootProject.glide}"
+    kapt "com.github.bumptech.glide:compiler:${rootProject.glide}"
+}
