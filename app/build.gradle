@@ -7,7 +7,7 @@ Properties build = new Properties()
 build.load(new FileInputStream(project.file("build.properties")))
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.targetSdkVersion
 
     defaultConfig {
         println "[x1210x] versionCode = ${Integer.valueOf(build.getProperty("versionCode"))}"
