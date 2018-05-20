@@ -19,6 +19,10 @@ android {
         versionCode Integer.valueOf(build.getProperty("versionCode"))
         versionName build.getProperty("versionName")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "NaverApiUrl", "\"https://openapi.naver.com/v1/search/\""
+        buildConfigField "String", "NaverClientId", "\"cYSVWLCyu4e1zGmFiFmq\""
+        buildConfigField "String", "NaverClientSecret", "\"iEJM8gGTSl\""
     }
 
     buildTypes {
@@ -39,6 +43,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${rootProject.kotlin_version}"
     // Support Libraries
     implementation "com.android.support:appcompat-v7:${rootProject.support}"
+    implementation "com.android.support:recyclerview-v7:${rootProject.support}"
     implementation "com.android.support.constraint:constraint-layout:${rootProject.support_constraint}"
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:${rootProject.rxjava}"
@@ -47,6 +52,9 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofit}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofit}"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
+    implementation "com.google.code.gson:gson:2.8.0"
     // Glide
     implementation "com.github.bumptech.glide:glide:${rootProject.glide}"
     kapt "com.github.bumptech.glide:compiler:${rootProject.glide}"
