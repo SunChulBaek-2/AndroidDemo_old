@@ -8,9 +8,9 @@ import ssun.pe.kr.androiddemo.BuildConfig
 import ssun.pe.kr.androiddemo.data.model.Result
 
 interface NaverService {
-    @GET("blog")
+    @GET("shop.json")
     @Headers(
             "X-Naver-Client-Id: ${BuildConfig.NaverClientId}",
             "X-Naver-Client-Secret: ${BuildConfig.NaverClientSecret}")
-    fun searchBlog(@Query("query") query: String): Single<Result>
+    fun searchShop(@Query("query") query: String): Single<Result>
 }

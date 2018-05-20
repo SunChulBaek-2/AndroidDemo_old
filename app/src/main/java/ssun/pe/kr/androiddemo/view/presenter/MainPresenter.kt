@@ -23,10 +23,10 @@ class MainPresenter(private val mView: MainContract.View) : MainContract.Present
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     mView.hideProgress()
-                    mView.onSerachBlog(it.total)
+                    mView.onSerachBlog(it)
                 }, {
                     mView.hideProgress()
-                    mView.onSerachBlog(-1)
+                    mView.onSerachBlog(null)
                 }).apply { mDisposables.add(this) }
     }
 }
