@@ -7,7 +7,8 @@ Properties build = new Properties()
 build.load(new FileInputStream(project.file("build.properties")))
 
 android {
-    compileSdkVersion rootProject.targetSdkVersion
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
         println "[x1210x] versionCode = ${Integer.valueOf(build.getProperty("versionCode"))}"
@@ -44,22 +45,22 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${rootProject.kotlin_version}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${rootProject.kotlinVersion}"
     // Support Libraries
-    implementation "com.android.support:appcompat-v7:${rootProject.support}"
-    implementation "com.android.support:recyclerview-v7:${rootProject.support}"
-    implementation "com.android.support.constraint:constraint-layout:${rootProject.support_constraint}"
+    implementation "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
+    implementation "com.android.support:recyclerview-v7:${rootProject.supportLibraryVersion}"
+    implementation "com.android.support.constraint:constraint-layout:${rootProject.supportConstraintVersion}"
     // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:${rootProject.rxjava}"
-    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxandroid}"
-    implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.rxkotlin}"
+    implementation "io.reactivex.rxjava2:rxjava:${rootProject.rxJavaVersion}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxAndroidVersion}"
+    implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.rxKotlinVersion}"
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofit}"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.retrofit}"
-    implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofit}"
-    implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
-    implementation "com.google.code.gson:gson:2.8.0"
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofitVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.okhttpVersion}"
+    implementation "com.google.code.gson:gson:${rootProject.gsonVersion}"
     // Glide
-    implementation "com.github.bumptech.glide:glide:${rootProject.glide}"
-    kapt "com.github.bumptech.glide:compiler:${rootProject.glide}"
+    implementation "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
+    kapt "com.github.bumptech.glide:compiler:${rootProject.glideVersion}"
 }
