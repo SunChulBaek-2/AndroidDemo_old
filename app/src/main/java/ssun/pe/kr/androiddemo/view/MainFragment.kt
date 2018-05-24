@@ -49,11 +49,11 @@ class MainFragment : Fragment() {
             }
         }
 
-        main_list.layoutManager = LinearLayoutManager(context)
-        main_list.adapter = MainAdapter(mItems)
+        rvItems.layoutManager = LinearLayoutManager(context)
+        rvItems.adapter = MainAdapter(mItems)
         val deco = DividerItemDecoration(context, VERTICAL)
         deco.setDrawable(ContextCompat.getDrawable(context!!, R.drawable.main_deco)!!)
-        main_list.addItemDecoration(deco)
+        rvItems.addItemDecoration(deco)
     }
 
     fun showProgress() {
