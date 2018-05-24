@@ -55,12 +55,4 @@ class MainFragment : Fragment() {
         deco.setDrawable(ContextCompat.getDrawable(context!!, R.drawable.main_deco)!!)
         rvItems.addItemDecoration(deco)
     }
-
-    fun showProgress() {
-        progress.visibility = View.VISIBLE
-    }
-
-    fun hideProgress() {
-        progress.visibility = View.GONE
-    }
 }
