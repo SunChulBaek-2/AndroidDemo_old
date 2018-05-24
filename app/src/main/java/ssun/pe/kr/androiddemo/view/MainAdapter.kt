@@ -1,4 +1,4 @@
-package ssun.pe.kr.androiddemo.view.adapter
+package ssun.pe.kr.androiddemo.view
 
 import android.databinding.BindingAdapter
 import android.databinding.DataBindingUtil
@@ -30,7 +30,7 @@ fun setProfile(iv: ImageView, url: String) {
         Glide.with(iv).load(url).into(iv)
 }
 
-class MainAdapter(private val mItems: List<Item>) : RecyclerView.Adapter<MainAdapter.MainHolder>() {
+class MainAdapter(private val mItems: MutableList<Item>) : RecyclerView.Adapter<MainAdapter.MainHolder>() {
 
     class MainHolder(val binding: MainItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -44,5 +44,11 @@ class MainAdapter(private val mItems: List<Item>) : RecyclerView.Adapter<MainAda
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         holder.binding.item = mItems[holder.adapterPosition]
+    }
+
+    fun replaceData(items: List<Item>) {
+        mItems.clear()
+        mItems.addAll(items)
+        notifyDataSetChanged()
     }
 }
