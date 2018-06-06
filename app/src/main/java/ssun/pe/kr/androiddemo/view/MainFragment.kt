@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.main_frag.*
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.data.model.Item
 import ssun.pe.kr.androiddemo.databinding.MainFragBinding
+import java.util.*
 
 class MainFragment : Fragment() {
 
@@ -21,7 +22,8 @@ class MainFragment : Fragment() {
     }
 
     var viewModel: MainViewModel? = null
-    var binding: MainFragBinding? = null
+
+    private var binding: MainFragBinding? = null
 
     private val mItems: MutableList<Item> = ArrayList()
 
@@ -30,12 +32,6 @@ class MainFragment : Fragment() {
         binding =  MainFragBinding.inflate(inflater, container, false)
         binding!!.viewmodel = viewModel
         return binding!!.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        viewModel?.destroy()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

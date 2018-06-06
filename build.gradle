@@ -11,9 +11,6 @@ ext {
     supportLibraryVersion = "27.1.1"
     supportConstraintVersion = "1.1.0"
     gsonVersion = "2.8.2"
-    rxJavaVersion = "2.1.13"
-    rxAndroidVersion = "2.0.2"
-    rxKotlinVersion = "2.2.0"
     retrofitVersion = "2.4.0"
     okhttpVersion = "3.10.0"
     glideVersion = "4.7.1"
@@ -21,6 +18,7 @@ ext {
 
 buildscript {
     ext.kotlinVersion = '1.2.41'
+    ext.kotlinCoroutineVersion = '0.22.5'
     ext.gradlePluginVersion = '3.1.2'
     repositories {
         google()

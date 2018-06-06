@@ -1,9 +1,9 @@
 package ssun.pe.kr.androiddemo.network
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import ssun.pe.kr.androiddemo.BuildConfig
 
@@ -11,7 +11,7 @@ class RetrofitCreator {
     companion object {
         fun create(): Retrofit = Retrofit.Builder()
                 .baseUrl(BuildConfig.NaverApiUrl)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(loggingClient())
                 .build()
