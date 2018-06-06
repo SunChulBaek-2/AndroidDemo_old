@@ -19,20 +19,18 @@ class MainViewModel : BaseObservable() {
     val inProgress: ObservableField<Boolean> = ObservableField(false)
     val items: ObservableList<Item> = ObservableArrayList()
 
-    fun searchBlog(query: String) {
+    fun searchBlog(query: String) = launch(UI) {
         inProgress.set(true)
 
-        launch(UI) {
-            try {
-                val result = NaverRepository.searchBlog(query).await()
-                Log.d(TAG, "[x1210x]${Thread.currentThread()} searchBlog($query)")
-                items.clear()
-                items.addAll(result.items)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            } finally {
-                inProgress.set(false)
-            }
+        try {
+            val result = NaverRepository.searchBlog(query).await()
+            Log.d(TAG, "[x1210x](${Thread.currentThread().name}) searchBlog($query)")
+            items.clear()
+            items.addAll(result.items)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            inProgress.set(false)
         }
     }
 }

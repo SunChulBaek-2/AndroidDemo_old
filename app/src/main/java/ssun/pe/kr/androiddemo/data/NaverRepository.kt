@@ -9,5 +9,5 @@ object NaverRepository : NaverDataSource {
     private val local: NaverDataSource = NaverLocalDataSource()
     private val remote: NaverDataSource = NaverRemoteDataSource()
 
-    override fun searchBlog(query: String): Deferred<Result> = remote.searchBlog(query)
+    override suspend fun searchBlog(query: String): Deferred<Result> = remote.searchBlog(query)
 }

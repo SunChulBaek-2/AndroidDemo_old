@@ -1,7 +1,9 @@
 package ssun.pe.kr.androiddemo.data.remote
 
 import android.util.Log
+import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.experimental.async
 import ssun.pe.kr.androiddemo.data.NaverDataSource
 import ssun.pe.kr.androiddemo.data.model.Result
 import ssun.pe.kr.androiddemo.network.NaverService
@@ -15,8 +17,8 @@ class NaverRemoteDataSource : NaverDataSource {
 
     private val mService: NaverService = RetrofitCreator.create().create(NaverService::class.java)
 
-    override fun searchBlog(query: String): Deferred<Result> {
-        Log.d(TAG, "[x1210x]${Thread.currentThread()} searchBlog($query)")
-        return mService.searchShop(query)
-    }
+    override suspend fun searchBlog(query: String): Deferred<Result> = async(CommonPool) {
+        Log.d(TAG, "[x1210x](${Thread.currentThread().name}) searchBlog($query)")
+        mService.searchShop(query)
+    }.await()
 }
