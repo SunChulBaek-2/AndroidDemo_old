@@ -12,10 +12,6 @@ import ssun.pe.kr.androiddemo.data.model.Item
 
 class MainViewModel : BaseObservable() {
 
-    companion object {
-        private const val TAG = "MainViewModel"
-    }
-
     val inProgress: ObservableField<Boolean> = ObservableField(false)
     val items: ObservableList<Item> = ObservableArrayList()
 
@@ -24,7 +20,6 @@ class MainViewModel : BaseObservable() {
 
         try {
             val result = NaverRepository.searchBlog(query).await()
-            Log.d(TAG, "[x1210x](${Thread.currentThread().name}) searchBlog($query)")
             items.clear()
             items.addAll(result.items)
         } catch (e: Exception) {
