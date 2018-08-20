@@ -16,7 +16,7 @@ class MainViewModel : ViewModel() {
         inProgress.value = true
 
         try {
-            val result = NaverRepository.searchBlog(query).await()
+            val result = NaverRepository.searchShop(query).await()
             items.value = result.items
         } catch (e: Exception) {
             e.printStackTrace()

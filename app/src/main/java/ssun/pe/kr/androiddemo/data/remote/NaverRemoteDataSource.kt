@@ -10,5 +10,5 @@ class NaverRemoteDataSource : NaverDataSource {
 
     private val mService: NaverService = RetrofitCreator.create().create(NaverService::class.java)
 
-    override fun searchBlog(query: String): Deferred<Result> = mService.searchShop(query)
+    override fun searchShop(query: String): Deferred<Result> = mService.searchShop(query)
 }

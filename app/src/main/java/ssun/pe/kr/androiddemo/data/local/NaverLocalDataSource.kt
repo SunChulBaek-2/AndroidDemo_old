@@ -6,5 +6,5 @@ import ssun.pe.kr.androiddemo.data.NaverDataSource
 import ssun.pe.kr.androiddemo.data.model.Result
 
 class NaverLocalDataSource : NaverDataSource {
-    override fun searchBlog(query: String): Deferred<Result> = TODO()
+    override fun searchShop(query: String): Deferred<Result> = TODO()
 }
