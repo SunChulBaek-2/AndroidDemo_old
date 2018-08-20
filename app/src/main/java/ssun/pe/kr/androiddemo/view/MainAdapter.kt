@@ -1,54 +1,36 @@
 package ssun.pe.kr.androiddemo.view
 
-import android.databinding.BindingAdapter
-import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.main_item.*
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.data.model.Item
-import ssun.pe.kr.androiddemo.databinding.MainItemBinding
 import java.text.DecimalFormat
 
-@BindingAdapter("setTitle")
-fun setText(tv: TextView, text: String) {
-    tv.text = Html.fromHtml(text)
-}
+class MainAdapter : RecyclerView.Adapter<MainHolder>() {
 
-@BindingAdapter("setDesc")
-fun setDesc(tv: TextView, text: String) {
-        val df = DecimalFormat("#,###,###")
-        tv.text = Html.fromHtml("최저 <b>${df.format(text.toInt())}</b>원")
-}
-
-@BindingAdapter("setProfile")
-fun setProfile(iv: ImageView, url: String) {
-        Glide.with(iv).load(url).into(iv)
-}
-
-class MainAdapter(private val mItems: MutableList<Item>) : RecyclerView.Adapter<MainAdapter.MainHolder>() {
-
-    class MainHolder(val binding: MainItemBinding) : RecyclerView.ViewHolder(binding.root)
+    var mItems: MutableList<Item>? = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
-        val binding: MainItemBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context), R.layout.main_item, parent, false)
-        return MainHolder(binding)
+        return MainHolder(LayoutInflater.from(parent.context)
+                .inflate(R.layout.main_item, parent, false))
     }
 
-    override fun getItemCount(): Int = mItems.size
+    override fun getItemCount(): Int = mItems?.size ?: 0
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        holder.binding.item = mItems[holder.adapterPosition]
-    }
+        mItems?.get(holder.adapterPosition)?.let { item ->
+            Glide.with(holder.ivImage)
+                    .load(item.image)
+                    .into(holder.ivImage)
 
-    fun replaceData(items: List<Item>) {
-        mItems.clear()
-        mItems.addAll(items)
-        notifyDataSetChanged()
+            holder.tvTitle.text = Html.fromHtml(item.title)
+
+            val df = DecimalFormat("#,###,###")
+            holder.tvLPrice.text = Html.fromHtml("최저 <b>${df.format(item.lprice.toInt())}</b>원")
+        }
     }
 }

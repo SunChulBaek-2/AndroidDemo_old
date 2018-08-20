@@ -33,10 +33,6 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
-    }
-
     packagingOptions {
         exclude 'META-INF/main.kotlin_module'
     }
@@ -46,6 +42,10 @@ kotlin {
     experimental {
         coroutines 'enable'
     }
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
@@ -63,6 +63,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
     implementation "com.android.support:recyclerview-v7:${rootProject.supportLibraryVersion}"
     implementation "com.android.support.constraint:constraint-layout:${rootProject.supportConstraintVersion}"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofitVersion}"
