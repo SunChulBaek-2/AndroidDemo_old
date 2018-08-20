@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_main.*
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.data.model.Item
-import java.util.*
 
 class MainFragment : Fragment() {
 
@@ -25,8 +24,6 @@ class MainFragment : Fragment() {
     private val mViewModel: MainViewModel by lazy {
         ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
-
-    private val mItems: MutableList<Item> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -65,8 +62,10 @@ class MainFragment : Fragment() {
         })
 
         mViewModel.items.observe(this, Observer { items ->
-            (rvItems.adapter as MainAdapter).mItems = items as MutableList<Item>
-            (rvItems.adapter as MainAdapter).notifyDataSetChanged()
+            (rvItems.adapter as MainAdapter).apply {
+                mItems = items as MutableList<Item>
+                notifyDataSetChanged()
+            }
         })
     }
 }
