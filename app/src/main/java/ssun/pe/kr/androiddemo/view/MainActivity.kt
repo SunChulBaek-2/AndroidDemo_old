@@ -1,7 +1,7 @@
 package ssun.pe.kr.androiddemo.view
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import ssun.pe.kr.androiddemo.R
 
 class MainActivity : AppCompatActivity() {

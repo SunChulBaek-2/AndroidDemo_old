@@ -1,7 +1,7 @@
 package ssun.pe.kr.androiddemo.view
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import ssun.pe.kr.androiddemo.data.NaverRepository

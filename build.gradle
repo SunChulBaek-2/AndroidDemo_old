@@ -8,12 +8,13 @@ ext {
 
     // App dependencies
     archLifecycleVersion = "1.0.0"
-    supportLibraryVersion = "27.1.1"
+    supportLibraryVersion = "1.0.0-rc01"
     supportConstraintVersion = "1.1.2"
+    supportLifecycleVersion = "2.0.0-rc01"
     gsonVersion = "2.8.2"
     retrofitVersion = "2.4.0"
     okhttpVersion = "3.10.0"
-    glideVersion = "4.7.1"
+    glideVersion = "4.8.0"
 }
 
 buildscript {

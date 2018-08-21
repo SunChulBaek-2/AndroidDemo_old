@@ -1,10 +1,10 @@
 package ssun.pe.kr.androiddemo.view
 
-import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.main_item.*
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.data.model.Item
@@ -23,8 +23,10 @@ class MainAdapter : RecyclerView.Adapter<MainHolder>() {
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         mItems?.get(holder.adapterPosition)?.let { item ->
-            Glide.with(holder.ivImage)
+            Picasso.get()
                     .load(item.image)
+                    .resize(200, 200)
+                    .centerCrop()
                     .into(holder.ivImage)
 
             holder.tvTitle.text = Html.fromHtml(item.title)
