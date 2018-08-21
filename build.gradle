@@ -14,15 +14,15 @@ ext {
     supportConstraintVersion = "1.1.2"
     supportLifecycleVersion = "2.0.0-rc01"
     ktxVersion = "1.0.0-rc01"
-    gsonVersion = "2.8.2"
+    gsonVersion = "2.8.5"
     retrofitVersion = "2.4.0"
-    okhttpVersion = "3.10.0"
+    okhttpVersion = "3.11.0"
     glideVersion = "4.8.0"
 }
 
 buildscript {
-    ext.kotlinVersion = '1.2.60'
-    ext.kotlinCoroutinesVersion = '0.23.1'
+    ext.kotlinVersion = '1.2.61'
+    ext.kotlinCoroutinesVersion = '0.24.0'
     ext.gradlePluginVersion = '3.1.3'
 
     repositories {
