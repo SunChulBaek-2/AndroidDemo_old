@@ -63,6 +63,9 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:${rootProject.supportLibraryVersion}"
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.supportConstraintVersion}"
     implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.supportLifecycleVersion}"
+    // KTX
+    implementation "androidx.core:core-ktx:${rootProject.ktxVersion}"
+    implementation "androidx.fragment:fragment-ktx:${rootProject.ktxVersion}"
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofitVersion}"

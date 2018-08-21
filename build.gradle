@@ -11,6 +11,7 @@ ext {
     supportLibraryVersion = "1.0.0-rc01"
     supportConstraintVersion = "1.1.2"
     supportLifecycleVersion = "2.0.0-rc01"
+    ktxVersion = "1.0.0-rc01"
     gsonVersion = "2.8.2"
     retrofitVersion = "2.4.0"
     okhttpVersion = "3.10.0"
