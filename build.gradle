@@ -1,3 +1,5 @@
+apply plugin: "com.github.ben-manes.versions"
+
 // Define versions in a single place
 ext {
     // Sdk and tools
@@ -31,6 +33,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.20.0"
     }
 }
 

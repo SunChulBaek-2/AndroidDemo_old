@@ -30,6 +30,9 @@ jobs:
 #      - store_test_results:
 #          path: app/build/test-results
       - run:
+          name: Check Dependency Updates
+          command: ./gradlew dependencyUpdates -Drevision=release -DoutputFormatter=plain
+      - run:
           name: Build Binaries
           command: ./gradlew assembleDebug
       - store_artifacts:
