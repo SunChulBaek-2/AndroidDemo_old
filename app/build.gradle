@@ -33,6 +33,10 @@ android {
         }
     }
 
+    dataBinding {
+        enabled true
+    }
+
     packagingOptions {
         exclude 'META-INF/main.kotlin_module'
     }
@@ -42,10 +46,6 @@ kotlin {
     experimental {
         coroutines 'enable'
     }
-}
-
-androidExtensions {
-    experimental = true
 }
 
 dependencies {
@@ -60,15 +60,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${rootProject.kotlinCoroutinesVersion}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${rootProject.kotlinCoroutinesVersion}"
 
-    // Support Libraries (AndroidX)
-    implementation "androidx.appcompat:appcompat:${rootProject.appcompatVersion}"
-    implementation "androidx.recyclerview:recyclerview:${rootProject.appcompatVersion}"
-    implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintLayoutVersion}"
-    implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.lifecycleVersion}"
-
-    // KTX
-    implementation "androidx.core:core-ktx:${rootProject.ktxVersion}"
-    implementation "androidx.fragment:fragment-ktx:${rootProject.ktxVersion}"
+    // Support Libraries
+    implementation "com.android.support:appcompat-v7:${rootProject.appcompatVersion}"
+    implementation "com.android.support:recyclerview-v7:${rootProject.appcompatVersion}"
+    implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintLayoutVersion}"
+    implementation "android.arch.lifecycle:extensions:${rootProject.lifecycleVersion}"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
@@ -77,6 +73,7 @@ dependencies {
     implementation "com.google.code.gson:gson:${rootProject.gsonVersion}"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${rootProject.retrofitCoroutinesAdapterVersion}"
 
-    // Picasso (Glide conflicts AndroidX)
-    implementation "com.squareup.picasso:picasso:${rootProject.picassoVersion}"
+    // Glide
+    implementation "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
+    kapt "com.github.bumptech.glide:compiler:${rootProject.glideVersion}"
 }

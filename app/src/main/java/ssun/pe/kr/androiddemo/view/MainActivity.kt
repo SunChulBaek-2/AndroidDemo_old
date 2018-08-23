@@ -1,8 +1,7 @@
 package ssun.pe.kr.androiddemo.view
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.transaction
+import android.support.v7.app.AppCompatActivity
 import ssun.pe.kr.androiddemo.R
 
 class MainActivity : AppCompatActivity() {
@@ -11,8 +10,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_container)
 
-        supportFragmentManager.transaction {
-            add(R.id.container, MainFragment(), MainFragment.TAG)
-        }
+        supportFragmentManager.beginTransaction()
+                .add(R.id.container, MainFragment(), MainFragment.TAG)
+                .commit()
     }
 }

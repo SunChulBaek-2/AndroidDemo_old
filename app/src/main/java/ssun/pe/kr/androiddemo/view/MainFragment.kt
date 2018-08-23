@@ -1,19 +1,18 @@
 package ssun.pe.kr.androiddemo.view
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.DividerItemDecoration.VERTICAL
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
-import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_main.*
 import ssun.pe.kr.androiddemo.R
-import ssun.pe.kr.androiddemo.data.model.Item
+import ssun.pe.kr.androiddemo.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 
@@ -21,13 +20,18 @@ class MainFragment : Fragment() {
         const val TAG = "MainFragment"
     }
 
-    private val mViewModel: MainViewModel by lazy {
-        ViewModelProviders.of(this).get(MainViewModel::class.java)
-    }
+    private lateinit var viewModel: MainViewModel
+    private lateinit var binding: FragmentMainBinding
+    private lateinit var adapter: MainAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        binding = FragmentMainBinding.inflate(inflater, container, false).apply {
+            setLifecycleOwner(this@MainFragment)
+            viewModel = this@MainFragment.viewModel
+        }
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,37 +39,31 @@ class MainFragment : Fragment() {
 
         initViews()
         setListeners()
-        updateViews()
+
+        viewModel.items.observe(this, Observer { items ->
+            adapter.submitList(items)
+        })
     }
 
     private fun initViews() {
-        rvItems.layoutManager = LinearLayoutManager(context)
-        rvItems.adapter = MainAdapter()
-        val deco = DividerItemDecoration(context, VERTICAL)
-        deco.setDrawable(ContextCompat.getDrawable(context!!, R.drawable.main_deco)!!)
-        rvItems.addItemDecoration(deco)
-    }
+        adapter = MainAdapter(this)
 
-    private fun setListeners() {
-        btnSearch.setOnClickListener {
-            etSearch.text.toString().let { text ->
-                if (text.isNotBlank()) {
-                    mViewModel.searchBlog(text)
-                }
-            }
+        binding.rvItems.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = this@MainFragment.adapter
+            val deco = DividerItemDecoration(context, VERTICAL)
+            deco.setDrawable(ContextCompat.getDrawable(context!!, R.drawable.main_deco)!!)
+            addItemDecoration(deco)
         }
     }
 
-    private fun updateViews() {
-        mViewModel.inProgress.observe(this, Observer { inProgress ->
-            progress.visibility = if (inProgress!!) View.VISIBLE else View.GONE
-        })
-
-        mViewModel.items.observe(this, Observer { items ->
-            (rvItems.adapter as MainAdapter).apply {
-                mItems = items as MutableList<Item>
-                notifyDataSetChanged()
+    private fun setListeners() {
+        binding.btnSearch.setOnClickListener {
+            binding.etSearch.text.toString().let { text ->
+                if (text.isNotBlank()) {
+                    viewModel.searchBlog(text)
+                }
             }
-        })
+        }
     }
 }
