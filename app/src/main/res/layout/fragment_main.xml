@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="ssun.pe.kr.androiddemo.view.MainViewModel" />
+            type="ssun.pe.kr.androiddemo.view.main.MainViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.MainActivity">
+        tools:context=".view.main.MainActivity">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/clSearch"

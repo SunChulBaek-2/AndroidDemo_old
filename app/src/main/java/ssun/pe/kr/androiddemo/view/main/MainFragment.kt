@@ -1,4 +1,4 @@
-package ssun.pe.kr.androiddemo.view
+package ssun.pe.kr.androiddemo.view.main
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.FragmentMainBinding
+import ssun.pe.kr.androiddemo.view.detail.DetailActivity
 
 class MainFragment : Fragment() {
 
@@ -20,17 +21,22 @@ class MainFragment : Fragment() {
         const val TAG = "MainFragment"
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: FragmentMainBinding
     private lateinit var adapter: MainAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         binding = FragmentMainBinding.inflate(inflater, container, false).apply {
             setLifecycleOwner(this@MainFragment)
-            viewModel = this@MainFragment.viewModel
+            viewModel = this@MainFragment.mainViewModel
         }
+
+        mainViewModel.navigateToDetail.observe(this, Observer { url ->
+            startActivity(DetailActivity.starterIntent(requireContext(), url))
+        })
+
         return binding.root
     }
 
@@ -40,13 +46,13 @@ class MainFragment : Fragment() {
         initViews()
         setListeners()
 
-        viewModel.items.observe(this, Observer { items ->
+        mainViewModel.items.observe(this, Observer { items ->
             adapter.submitList(items)
         })
     }
 
     private fun initViews() {
-        adapter = MainAdapter(this)
+        adapter = MainAdapter(mainViewModel, this)
 
         binding.rvItems.apply {
             layoutManager = LinearLayoutManager(context)
@@ -61,7 +67,7 @@ class MainFragment : Fragment() {
         binding.btnSearch.setOnClickListener {
             binding.etSearch.text.toString().let { text ->
                 if (text.isNotBlank()) {
-                    viewModel.searchBlog(text)
+                    mainViewModel.searchBlog(text)
                 }
             }
         }

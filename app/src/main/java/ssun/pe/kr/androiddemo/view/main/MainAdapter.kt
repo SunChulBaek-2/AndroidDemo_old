@@ -1,4 +1,4 @@
-package ssun.pe.kr.androiddemo.view
+package ssun.pe.kr.androiddemo.view.main
 
 import android.arch.lifecycle.LifecycleOwner
 import android.support.v7.recyclerview.extensions.ListAdapter
@@ -10,12 +10,13 @@ import ssun.pe.kr.androiddemo.data.model.Item
 import ssun.pe.kr.androiddemo.databinding.ItemMainBinding
 
 class MainAdapter(
+        private val eventListener: EventActions,
         private val lifecycleOwner: LifecycleOwner
 ) : ListAdapter<Item, MainHolder>(SessionDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = ItemMainBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MainHolder(binding, lifecycleOwner)
+        return MainHolder(binding, eventListener, lifecycleOwner)
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
@@ -25,11 +26,13 @@ class MainAdapter(
 
 class MainHolder(
         private val binding: ItemMainBinding,
+        private val eventListener: EventActions,
         private val lifecycleOwner: LifecycleOwner
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Item) {
         binding.item = item
+        binding.eventListener = eventListener
         binding.setLifecycleOwner(lifecycleOwner)
         binding.executePendingBindings()
     }

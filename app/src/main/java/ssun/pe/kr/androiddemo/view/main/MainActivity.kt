@@ -1,4 +1,4 @@
-package ssun.pe.kr.androiddemo.view
+package ssun.pe.kr.androiddemo.view.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,10 +8,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_container)
+        setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-                .add(R.id.container, MainFragment(), MainFragment.TAG)
+                .add(R.id.main_container, MainFragment(), MainFragment.TAG)
                 .commit()
     }
 }

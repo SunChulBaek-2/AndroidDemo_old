@@ -3,6 +3,7 @@ package ssun.pe.kr.androiddemo.util
 import android.databinding.BindingAdapter
 import android.text.Html
 import android.view.View
+import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -20,6 +21,11 @@ fun imageUrl(iv: ImageView, imageUrl: String?) {
             .load(imageUrl)
             .apply(RequestOptions().centerCrop())
             .into(iv)
+}
+
+@BindingAdapter("webViewUrl")
+fun webViewUrl(wv: WebView, webViewUrl: String?) {
+    wv.loadUrl(webViewUrl)
 }
 
 @BindingAdapter("lowestPrice")
