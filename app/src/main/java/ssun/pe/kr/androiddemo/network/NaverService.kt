@@ -12,5 +12,9 @@ interface NaverService {
     @Headers(
             "X-Naver-Client-Id: ${BuildConfig.NaverClientId}",
             "X-Naver-Client-Secret: ${BuildConfig.NaverClientSecret}")
-    fun searchShop(@Query("query") query: String): Deferred<Result>
+    fun searchShop(
+            @Query("query") query: String,
+            @Query("display") display: Int?,
+            @Query("start") start: Int?,
+            @Query("sort") sort: String?): Deferred<Result>
 }
