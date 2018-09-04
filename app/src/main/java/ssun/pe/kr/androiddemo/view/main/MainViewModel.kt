@@ -19,7 +19,7 @@ class MainViewModel : ViewModel(), EventActions {
     val navigateToDetail: LiveData<String>
         get() = _navigateToDetail
 
-    fun searchBlog(query: String, start: Int? = 1) = launch(UI) {
+    fun searchShop(query: String, start: Int? = 1) = launch(UI) {
         isLoading.value = true
 
         try {
@@ -37,7 +37,7 @@ class MainViewModel : ViewModel(), EventActions {
     }
 
     override fun loadMore() {
-        searchBlog(query.value!!, items.value!!.size + 1)
+        searchShop(query.value!!, items.value!!.size + 1)
     }
 
     override fun openDetail(url: String) {
