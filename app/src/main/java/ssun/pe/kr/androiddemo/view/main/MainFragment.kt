@@ -44,7 +44,6 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
-        setListeners()
 
         mainViewModel.items.observe(this, Observer { items ->
             adapter.submitList(items)
@@ -60,16 +59,6 @@ class MainFragment : Fragment() {
             val deco = DividerItemDecoration(context, VERTICAL)
             deco.setDrawable(ContextCompat.getDrawable(context!!, R.drawable.main_deco)!!)
             addItemDecoration(deco)
-        }
-    }
-
-    private fun setListeners() {
-        binding.btnSearch.setOnClickListener {
-            binding.etSearch.text.toString().let { text ->
-                if (text.isNotBlank()) {
-                    mainViewModel.searchBlog(text)
-                }
-            }
         }
     }
 }

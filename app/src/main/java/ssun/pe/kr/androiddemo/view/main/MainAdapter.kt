@@ -21,6 +21,10 @@ class MainAdapter(
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         holder.bind(getItem(position))
+
+        if (holder.adapterPosition == itemCount - 1) {
+            eventListener.loadMore()
+        }
     }
 }
 

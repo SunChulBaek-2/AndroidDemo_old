@@ -25,6 +25,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:hint="검색할 단어를 입력하세요"
+                android:text="@={viewModel.query}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/btnSearch" />
 
@@ -32,6 +33,7 @@
                 android:id="@+id/btnSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:onClick="@{() -> viewModel.searchBlog(viewModel.query, 1)}"
                 android:text="검색"
                 app:layout_constraintRight_toRightOf="parent" />
         </android.support.constraint.ConstraintLayout>
@@ -58,10 +60,10 @@
             android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:goneUnless="@{viewModel.isLoading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:goneUnless="@{viewModel.isLoading}"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>
