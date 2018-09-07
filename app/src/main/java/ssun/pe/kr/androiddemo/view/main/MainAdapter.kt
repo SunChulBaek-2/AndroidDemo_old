@@ -43,11 +43,17 @@ class MainHolder(
 }
 
 object SessionDiff : DiffUtil.ItemCallback<Item>() {
-    override fun areItemsTheSame(oldItem: Item?, newItem: Item?): Boolean {
+    /**
+     * Called to check whether two objects represent the same item.
+     */
+    override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Item?, newItem: Item?): Boolean {
-        return oldItem == newItem
+    /**
+     * Called to check whether two items have the same data.
+     */
+    override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
+        return oldItem.productId == newItem.productId
     }
 }
