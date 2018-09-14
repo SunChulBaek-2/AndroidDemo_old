@@ -27,7 +27,7 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java)
         binding = FragmentMainBinding.inflate(inflater, container, false).apply {
             setLifecycleOwner(this@MainFragment)
             viewModel = this@MainFragment.mainViewModel

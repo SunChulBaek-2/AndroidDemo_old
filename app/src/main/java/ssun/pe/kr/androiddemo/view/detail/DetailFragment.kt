@@ -30,7 +30,7 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        detailViewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        detailViewModel = ViewModelProviders.of(requireActivity()).get(DetailViewModel::class.java)
         binding = FragmentDetailBinding.inflate(inflater, container, false).apply {
             setLifecycleOwner(this@DetailFragment)
             viewModel = this@DetailFragment.detailViewModel
