@@ -7,7 +7,8 @@ Properties build = new Properties()
 build.load(new FileInputStream(project.file("build.properties")))
 
 android {
-    compileSdkVersion rootProject.targetSdkVersion
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
         println "[x1210x] versionCode = ${Integer.valueOf(build.getProperty("versionCode"))}"
@@ -19,6 +20,10 @@ android {
         versionCode Integer.valueOf(build.getProperty("versionCode"))
         versionName build.getProperty("versionName")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "NaverApiUrl", "\"https://openapi.naver.com/v1/search/\""
+        buildConfigField "String", "NaverClientId", "\"cYSVWLCyu4e1zGmFiFmq\""
+        buildConfigField "String", "NaverClientSecret", "\"iEJM8gGTSl\""
     }
 
     buildTypes {
@@ -26,6 +31,20 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/main.kotlin_module'
+    }
+}
+
+kotlin {
+    experimental {
+        coroutines 'enable'
     }
 }
 
@@ -35,19 +54,26 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${rootProject.kotlin_version}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${rootProject.kotlinVersion}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${rootProject.kotlinCoroutinesVersion}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${rootProject.kotlinCoroutinesVersion}"
+
     // Support Libraries
-    implementation "com.android.support:appcompat-v7:${rootProject.support}"
-    implementation "com.android.support.constraint:constraint-layout:${rootProject.support_constraint}"
-    // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:${rootProject.rxjava}"
-    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxandroid}"
-    implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.rxkotlin}"
+    implementation "com.android.support:appcompat-v7:${rootProject.appcompatVersion}"
+    implementation "com.android.support:recyclerview-v7:${rootProject.appcompatVersion}"
+    implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintLayoutVersion}"
+    implementation "android.arch.lifecycle:extensions:${rootProject.lifecycleVersion}"
+
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofit}"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.retrofit}"
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofitVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.okhttpVersion}"
+    implementation "com.google.code.gson:gson:${rootProject.gsonVersion}"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${rootProject.retrofitCoroutinesAdapterVersion}"
+
     // Glide
-    implementation "com.github.bumptech.glide:glide:${rootProject.glide}"
-    kapt "com.github.bumptech.glide:compiler:${rootProject.glide}"
+    implementation "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
+    kapt "com.github.bumptech.glide:compiler:${rootProject.glideVersion}"
 }

@@ -15,7 +15,8 @@ jobs:
           command: ./gradlew androidDependencies
       - save_cache:
           paths:
-            - ~/.gradle
+            - ~/.gradle/caches
+            - ~/.gradle/wrapper
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
@@ -28,6 +29,9 @@ jobs:
 #          destination: reports
 #      - store_test_results:
 #          path: app/build/test-results
+      - run:
+          name: Check Dependency Updates
+          command: ./gradlew dependencyUpdates -Drevision=release -DoutputFormatter=plain
       - run:
           name: Build Binaries
           command: ./gradlew assembleDebug
