@@ -8,7 +8,9 @@ import kotlinx.coroutines.experimental.launch
 import ssun.pe.kr.androiddemo.data.NaverRepository
 import ssun.pe.kr.androiddemo.data.model.Item
 
-class MainViewModel : ViewModel(), EventActions {
+class MainViewModel(
+        private val repository: NaverRepository
+) : ViewModel(), EventActions {
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val query: MutableLiveData<String> = MutableLiveData()
@@ -23,7 +25,7 @@ class MainViewModel : ViewModel(), EventActions {
         isLoading.value = true
 
         try {
-            val result = NaverRepository.searchShop(query = query, start = start).await()
+            val result = repository.searchShop(query = query, start = start).await()
             if (start == 1) {
                 items.value = result.items as MutableList<Item>
             } else {

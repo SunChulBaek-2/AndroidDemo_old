@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import kotlinx.android.synthetic.main.fragment_detail.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import ssun.pe.kr.androiddemo.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
@@ -26,11 +27,10 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private lateinit var detailViewModel: DetailViewModel
+    private val detailViewModel: DetailViewModel by viewModel()
     private lateinit var binding: FragmentDetailBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        detailViewModel = ViewModelProviders.of(requireActivity()).get(DetailViewModel::class.java)
         binding = FragmentDetailBinding.inflate(inflater, container, false).apply {
             setLifecycleOwner(this@DetailFragment)
             viewModel = this@DetailFragment.detailViewModel

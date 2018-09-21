@@ -6,7 +6,7 @@ import ssun.pe.kr.androiddemo.data.model.Result
 interface NaverDataSource {
     fun searchShop(
             query: String,
-            display: Int? = 10,
-            start: Int? = 1,
-            sort: String? = "sim"): Deferred<Result>
+            display: Int?,
+            start: Int?,
+            sort: String?): Deferred<Result>
 }

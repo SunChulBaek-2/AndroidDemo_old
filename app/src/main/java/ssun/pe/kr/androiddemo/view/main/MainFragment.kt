@@ -1,7 +1,6 @@
 package ssun.pe.kr.androiddemo.view.main
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -11,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import org.koin.android.viewmodel.ext.android.viewModel
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.FragmentMainBinding
 import ssun.pe.kr.androiddemo.view.detail.DetailActivity
@@ -21,13 +21,12 @@ class MainFragment : Fragment() {
         const val TAG = "MainFragment"
     }
 
-    private lateinit var mainViewModel: MainViewModel
+    private val mainViewModel: MainViewModel by viewModel()
     private lateinit var binding: FragmentMainBinding
     private lateinit var adapter: MainAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        mainViewModel = ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java)
         binding = FragmentMainBinding.inflate(inflater, container, false).apply {
             setLifecycleOwner(this@MainFragment)
             viewModel = this@MainFragment.mainViewModel

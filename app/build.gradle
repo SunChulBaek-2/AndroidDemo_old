@@ -66,6 +66,10 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintLayoutVersion}"
     implementation "android.arch.lifecycle:extensions:${rootProject.lifecycleVersion}"
 
+    // Koin
+    implementation "org.koin:koin-android:${rootProject.koinVersion}"
+    implementation "org.koin:koin-android-viewmodel:${rootProject.koinVersion}"
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofitVersion}"
