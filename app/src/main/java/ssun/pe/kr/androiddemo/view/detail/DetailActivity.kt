@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import ssun.pe.kr.androiddemo.R
+import timber.log.Timber
 
 class DetailActivity : AppCompatActivity() {
 
@@ -20,6 +21,9 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Timber.d("[x1210x] onCreate()")
+
         setContentView(R.layout.activity_detail)
 
         intent?.getStringExtra(EXTRA_DETAIL_URL)?.let { url ->
@@ -27,5 +31,11 @@ class DetailActivity : AppCompatActivity() {
                     .add(R.id.detail_container, DetailFragment.newInstance(url), DetailFragment.TAG)
                     .commit()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Timber.d("[x1210x] onDestroy()")
     }
 }

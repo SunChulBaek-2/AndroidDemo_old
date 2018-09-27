@@ -14,6 +14,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.FragmentMainBinding
 import ssun.pe.kr.androiddemo.view.detail.DetailActivity
+import timber.log.Timber
 
 class MainFragment : Fragment() {
 
@@ -24,6 +25,18 @@ class MainFragment : Fragment() {
     private val mainViewModel: MainViewModel by viewModel()
     private lateinit var binding: FragmentMainBinding
     private lateinit var adapter: MainAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        Timber.d("[x1210x] onCreate()")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Timber.d("[x1210x] onDestroy()")
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

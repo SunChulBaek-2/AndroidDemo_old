@@ -1,7 +1,6 @@
 package ssun.pe.kr.androiddemo.view.detail
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import android.webkit.WebViewClient
 import kotlinx.android.synthetic.main.fragment_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import ssun.pe.kr.androiddemo.databinding.FragmentDetailBinding
+import timber.log.Timber
 
 class DetailFragment : Fragment() {
 
@@ -29,6 +29,18 @@ class DetailFragment : Fragment() {
 
     private val detailViewModel: DetailViewModel by viewModel()
     private lateinit var binding: FragmentDetailBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        Timber.d("[x1210x] onCreate()")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Timber.d("[x1210x] onDestroy()")
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDetailBinding.inflate(inflater, container, false).apply {

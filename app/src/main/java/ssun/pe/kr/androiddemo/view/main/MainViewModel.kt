@@ -3,18 +3,17 @@ package ssun.pe.kr.androiddemo.view.main
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import kotlin.coroutines.experimental.CoroutineContext
 import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.android.Main
+import kotlinx.coroutines.experimental.android.UI
 import ssun.pe.kr.androiddemo.data.NaverRepository
 import ssun.pe.kr.androiddemo.data.model.Item
+import timber.log.Timber
 
 class MainViewModel(
         private val repository: NaverRepository
-) : ViewModel(), EventActions, CoroutineScope {
+) : ViewModel(), EventActions {
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main
+    private val jobs = mutableListOf<Job>()
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val query: MutableLiveData<String> = MutableLiveData()
@@ -25,7 +24,18 @@ class MainViewModel(
     val navigateToDetail: LiveData<String>
         get() = _navigateToDetail
 
-    fun searchShop(query: String, start: Int? = 1) = launch {
+    override fun onCleared() {
+        super.onCleared()
+
+        Timber.d("[x1210x] onCleared()")
+
+        jobs.forEachIndexed { index, job ->
+            Timber.d("[x1210x] $index th job canceled")
+            job.cancel()
+        }
+    }
+
+    fun searchShop(query: String, start: Int? = 1) = launch(UI) {
         isLoading.value = true
 
         try {
