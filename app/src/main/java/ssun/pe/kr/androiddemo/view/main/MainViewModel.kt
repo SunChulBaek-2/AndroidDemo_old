@@ -3,14 +3,18 @@ package ssun.pe.kr.androiddemo.view.main
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.experimental.android.Main
 import ssun.pe.kr.androiddemo.data.NaverRepository
 import ssun.pe.kr.androiddemo.data.model.Item
 
 class MainViewModel(
         private val repository: NaverRepository
-) : ViewModel(), EventActions {
+) : ViewModel(), EventActions, CoroutineScope {
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val query: MutableLiveData<String> = MutableLiveData()
@@ -21,7 +25,7 @@ class MainViewModel(
     val navigateToDetail: LiveData<String>
         get() = _navigateToDetail
 
-    fun searchShop(query: String, start: Int? = 1) = launch(UI) {
+    fun searchShop(query: String, start: Int? = 1) = launch {
         isLoading.value = true
 
         try {
