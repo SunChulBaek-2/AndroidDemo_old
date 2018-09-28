@@ -1,17 +1,19 @@
 package ssun.pe.kr.androiddemo
 
-import android.app.Application
-import org.koin.android.ext.android.startKoin
-import ssun.pe.kr.androiddemo.di.appModule
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
+import ssun.pe.kr.androiddemo.di.DaggerAppComponent
 import timber.log.Timber
 
-class App: Application() {
+class App: DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
 
         Timber.plant(Timber.DebugTree())
+    }
 
-        startKoin(this, listOf(appModule))
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder().create(this)
     }
 }

@@ -1,22 +1,42 @@
 package ssun.pe.kr.androiddemo.di
 
-import org.koin.androidx.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.module
+import android.content.Context
+import dagger.Module
+import dagger.Provides
+import ssun.pe.kr.androiddemo.App
+import ssun.pe.kr.androiddemo.data.LocalNaverDataSource
 import ssun.pe.kr.androiddemo.data.NaverDataSource
 import ssun.pe.kr.androiddemo.data.NaverRepository
-import ssun.pe.kr.androiddemo.data.LocalNaverDataSource
 import ssun.pe.kr.androiddemo.data.RemoteNaverDataSource
-import ssun.pe.kr.androiddemo.view.detail.DetailViewModel
-import ssun.pe.kr.androiddemo.view.main.MainViewModel
+import javax.inject.Named
+import javax.inject.Singleton
 
-val appModule = module {
-    single { NaverRepository(get("local"), get("remote")) }
+@Module
+class AppModule {
 
-    single<NaverDataSource>("local") { LocalNaverDataSource() }
+    @Provides
+    fun provideContext(application: App): Context {
+        return application.applicationContext
+    }
 
-    single<NaverDataSource>("remote") { RemoteNaverDataSource() }
+    @Provides
+    @Named("local")
+    fun provideLocalNaverDataSource(): NaverDataSource {
+        return LocalNaverDataSource()
+    }
 
-    viewModel { MainViewModel(get()) }
+    @Provides
+    @Named("remote")
+    fun provideRemoteNaverDataSource(): NaverDataSource {
+        return RemoteNaverDataSource()
+    }
 
-    viewModel { DetailViewModel() }
+    @Singleton
+    @Provides
+    fun provideNaverRepository(
+            @Named("local") localNaverDataSource: NaverDataSource,
+            @Named("remote") remoteNaverDataSource: NaverDataSource
+    ): NaverRepository {
+        return NaverRepository(localNaverDataSource, remoteNaverDataSource)
+    }
 }

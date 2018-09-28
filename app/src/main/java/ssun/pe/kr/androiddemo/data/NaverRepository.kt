@@ -2,8 +2,9 @@ package ssun.pe.kr.androiddemo.data
 
 import kotlinx.coroutines.experimental.Deferred
 import ssun.pe.kr.androiddemo.data.model.Result
+import javax.inject.Inject
 
-class NaverRepository(
+class NaverRepository @Inject constructor(
         private val localNaverDataSource: NaverDataSource,
         private val remoteNaverDataSource: NaverDataSource
 ) {

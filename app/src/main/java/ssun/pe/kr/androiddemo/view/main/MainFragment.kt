@@ -2,7 +2,6 @@ package ssun.pe.kr.androiddemo.view.main
 
 import androidx.lifecycle.Observer
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
@@ -10,19 +9,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.lifecycle.ViewModelProviders
+import dagger.android.support.DaggerFragment
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.FragmentMainBinding
 import ssun.pe.kr.androiddemo.view.detail.DetailActivity
 import timber.log.Timber
+import javax.inject.Inject
 
-class MainFragment : Fragment() {
+class MainFragment : DaggerFragment() {
 
     companion object {
         const val TAG = "MainFragment"
     }
 
-    private val mainViewModel: MainViewModel by viewModel()
+    @Inject lateinit var viewModelFactory: MainViewModelFactory
+
+    private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: FragmentMainBinding
     private lateinit var adapter: MainAdapter
 
@@ -40,6 +43,8 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        mainViewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
+
         binding = FragmentMainBinding.inflate(inflater, container, false).apply {
             setLifecycleOwner(this@MainFragment)
             viewModel = this@MainFragment.mainViewModel
