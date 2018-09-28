@@ -1,6 +1,6 @@
 package ssun.pe.kr.androiddemo.util
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.text.Html
 import android.view.View
 import android.webkit.WebView

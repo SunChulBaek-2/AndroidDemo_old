@@ -2,14 +2,14 @@ package ssun.pe.kr.androiddemo.view.detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import kotlinx.android.synthetic.main.fragment_detail.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ssun.pe.kr.androiddemo.databinding.FragmentDetailBinding
 import timber.log.Timber
 

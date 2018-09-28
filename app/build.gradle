@@ -19,7 +19,7 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode Integer.valueOf(build.getProperty("versionCode"))
         versionName build.getProperty("versionName")
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "NaverApiUrl", "\"https://openapi.naver.com/v1/search/\""
         buildConfigField "String", "NaverClientId", "\"cYSVWLCyu4e1zGmFiFmq\""
@@ -50,8 +50,8 @@ kotlin {
 
 dependencies {
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -61,14 +61,14 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${rootProject.kotlinCoroutinesVersion}"
 
     // Support Libraries
-    implementation "com.android.support:appcompat-v7:${rootProject.appcompatVersion}"
-    implementation "com.android.support:recyclerview-v7:${rootProject.appcompatVersion}"
-    implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintLayoutVersion}"
-    implementation "android.arch.lifecycle:extensions:${rootProject.lifecycleVersion}"
+    implementation "androidx.appcompat:appcompat:${rootProject.appcompatVersion}"
+    implementation "androidx.recyclerview:recyclerview:${rootProject.recyclerViewVersion}"
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintLayoutVersion}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.lifecycleVersion}"
 
     // Koin
     implementation "org.koin:koin-android:${rootProject.koinVersion}"
-    implementation "org.koin:koin-android-viewmodel:${rootProject.koinVersion}"
+    implementation "org.koin:koin-androidx-viewmodel:${rootProject.koinVersion}"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"

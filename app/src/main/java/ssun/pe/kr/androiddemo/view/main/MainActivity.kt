@@ -1,7 +1,7 @@
 package ssun.pe.kr.androiddemo.view.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import ssun.pe.kr.androiddemo.R
 import timber.log.Timber
 

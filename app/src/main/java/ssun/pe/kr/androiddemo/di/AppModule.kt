@@ -1,6 +1,6 @@
 package ssun.pe.kr.androiddemo.di
 
-import org.koin.android.viewmodel.ext.koin.viewModel
+import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import ssun.pe.kr.androiddemo.data.NaverDataSource
 import ssun.pe.kr.androiddemo.data.NaverRepository

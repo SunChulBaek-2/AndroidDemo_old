@@ -1,16 +1,16 @@
 package ssun.pe.kr.androiddemo.view.main
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.DividerItemDecoration.VERTICAL
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.FragmentMainBinding
 import ssun.pe.kr.androiddemo.view.detail.DetailActivity
