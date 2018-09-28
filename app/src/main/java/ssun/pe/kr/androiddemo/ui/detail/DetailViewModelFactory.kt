@@ -1,4 +1,4 @@
-package ssun.pe.kr.androiddemo.view.detail
+package ssun.pe.kr.androiddemo.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

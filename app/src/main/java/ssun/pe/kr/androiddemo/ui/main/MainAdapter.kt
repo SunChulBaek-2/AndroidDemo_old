@@ -1,4 +1,4 @@
-package ssun.pe.kr.androiddemo.view.main
+package ssun.pe.kr.androiddemo.ui.main
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.ListAdapter

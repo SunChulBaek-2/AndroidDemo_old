@@ -1,4 +1,4 @@
-package ssun.pe.kr.androiddemo.view.main
+package ssun.pe.kr.androiddemo.ui.main
 
 import androidx.lifecycle.Observer
 import android.os.Bundle
@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.DaggerFragment
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.FragmentMainBinding
-import ssun.pe.kr.androiddemo.view.detail.DetailActivity
+import ssun.pe.kr.androiddemo.ui.detail.DetailActivity
 import timber.log.Timber
 import javax.inject.Inject
 

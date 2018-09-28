@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="ssun.pe.kr.androiddemo.view.detail.DetailViewModel" />
+            type="ssun.pe.kr.androiddemo.ui.detail.DetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

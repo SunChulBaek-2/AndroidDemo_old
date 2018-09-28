@@ -1,4 +1,4 @@
-package ssun.pe.kr.androiddemo.view.main
+package ssun.pe.kr.androiddemo.ui.main
 
 import android.os.Bundle
 import dagger.android.support.DaggerAppCompatActivity

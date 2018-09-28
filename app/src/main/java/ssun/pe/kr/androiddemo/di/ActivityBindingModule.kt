@@ -2,10 +2,10 @@ package ssun.pe.kr.androiddemo.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import ssun.pe.kr.androiddemo.view.detail.DetailActivity
-import ssun.pe.kr.androiddemo.view.detail.DetailModule
-import ssun.pe.kr.androiddemo.view.main.MainActivity
-import ssun.pe.kr.androiddemo.view.main.MainModule
+import ssun.pe.kr.androiddemo.ui.detail.DetailActivity
+import ssun.pe.kr.androiddemo.ui.detail.DetailModule
+import ssun.pe.kr.androiddemo.ui.main.MainActivity
+import ssun.pe.kr.androiddemo.ui.main.MainModule
 
 @Module
 abstract class ActivityBindingModule {
