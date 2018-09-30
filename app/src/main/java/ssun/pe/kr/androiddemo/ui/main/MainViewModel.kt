@@ -59,4 +59,12 @@ class MainViewModel(
     override fun openDetail(url: String) {
         _navigateToDetail.value = url
     }
+
+    override fun removeItem(productId: Long): Boolean {
+        items.value = items.value?.filter { item ->
+            item.productId != productId
+        } as MutableList<Item>
+
+        return true
+    }
 }

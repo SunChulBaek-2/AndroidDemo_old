@@ -20,10 +20,11 @@
         android:layout_height="100dp"
         android:background="#FFFFFF"
         android:onClick="@{() -> eventListener.openDetail(item.link)}"
-        android:paddingBottom="10dp"
+        android:onLongClick="@{() -> eventListener.removeItem(item.productId)}"
         android:paddingLeft="10dp"
+        android:paddingTop="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp">
+        android:paddingBottom="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clImage"
@@ -62,9 +63,9 @@
             android:id="@+id/tvLPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="#FF0000"
