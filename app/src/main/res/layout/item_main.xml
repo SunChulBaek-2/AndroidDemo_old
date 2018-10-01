@@ -20,7 +20,6 @@
         android:layout_height="100dp"
         android:background="#FFFFFF"
         android:onClick="@{() -> eventListener.openDetail(item.link)}"
-        android:onLongClick="@{() -> eventListener.removeItem(item.productId)}"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"

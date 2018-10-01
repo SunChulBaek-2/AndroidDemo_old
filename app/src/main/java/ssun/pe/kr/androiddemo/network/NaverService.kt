@@ -15,6 +15,6 @@ interface NaverService {
     fun searchShop(
             @Query("query") query: String,
             @Query("display") display: Int?,
-            @Query("start") start: Int?,
+            @Query("start") start: Long?,
             @Query("sort") sort: String?): Deferred<Result>
 }

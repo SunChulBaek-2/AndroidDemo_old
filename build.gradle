@@ -18,6 +18,7 @@ ext {
     gsonVersion = '2.8.5'
     lifecycleVersion = '2.0.0'
     okhttpVersion = '3.11.0'
+    pagingVersion = '2.0.0-rc01'
     recyclerViewVersion = '1.0.0'
     retrofitVersion = '2.4.0'
     retrofitCoroutinesAdapterVersion = '1.0.0'
