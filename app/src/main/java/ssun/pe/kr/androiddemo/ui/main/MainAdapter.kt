@@ -1,18 +1,18 @@
 package ssun.pe.kr.androiddemo.ui.main
 
 import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import ssun.pe.kr.androiddemo.data.model.Item
 import ssun.pe.kr.androiddemo.databinding.ItemMainBinding
 
 class MainAdapter(
         private val eventListener: EventActions,
         private val lifecycleOwner: LifecycleOwner
-) : ListAdapter<Item, MainHolder>(SessionDiff) {
+) : PagedListAdapter<Item, MainHolder>(SessionDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = ItemMainBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,10 +21,6 @@ class MainAdapter(
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         holder.bind(getItem(position))
-
-        if (holder.adapterPosition == itemCount - 1) {
-            eventListener.loadMore()
-        }
     }
 }
 
@@ -34,7 +30,7 @@ class MainHolder(
         private val lifecycleOwner: LifecycleOwner
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Item) {
+    fun bind(item: Item?) {
         binding.item = item
         binding.eventListener = eventListener
         binding.setLifecycleOwner(lifecycleOwner)

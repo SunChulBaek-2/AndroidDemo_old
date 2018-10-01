@@ -3,29 +3,44 @@ package ssun.pe.kr.androiddemo.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.Main
-import ssun.pe.kr.androiddemo.data.NaverRepository
+import ssun.pe.kr.androiddemo.data.NaverDataFactory
 import ssun.pe.kr.androiddemo.data.model.Item
 import timber.log.Timber
+import java.util.concurrent.Executors
 import kotlin.coroutines.experimental.CoroutineContext
 
-class MainViewModel(
-        private val repository: NaverRepository
-) : ViewModel(), EventActions, CoroutineScope {
+class MainViewModel : ViewModel(), EventActions, CoroutineScope {
 
     private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
+    private val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(20)
+            .setPageSize(20).build()
+
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val refresh: MutableLiveData<Boolean> = MutableLiveData()
     val query: MutableLiveData<String> = MutableLiveData()
-    val items: MutableLiveData<MutableList<Item>> = MutableLiveData()
+    var items: LiveData<PagedList<Item>> = MutableLiveData()
 
     /** LiveData for Actions and Events **/
     private val _navigateToDetail = MutableLiveData<String>()
     val navigateToDetail: LiveData<String>
         get() = _navigateToDetail
+
+    init {
+        val naverDataFactory = NaverDataFactory("")
+
+        items = LivePagedListBuilder(naverDataFactory, config)
+                .setFetchExecutor(Executors.newFixedThreadPool(5))
+                .build()
+    }
 
     override fun onCleared() {
         super.onCleared()
@@ -35,36 +50,19 @@ class MainViewModel(
         job.cancel()
     }
 
-    fun searchShop(query: String, start: Int? = 1) = launch {
-        isLoading.value = true
+    override fun searchShop() {
+        query.value?.let { query ->
+            val naverDataFactory = NaverDataFactory(query)
 
-        try {
-            val result = repository.searchShop(query = query, start = start).await()
-            if (start == 1) {
-                items.value = result.items as MutableList<Item>
-            } else {
-                items.value?.addAll(result.items)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            isLoading.value = false
+            items = LivePagedListBuilder(naverDataFactory, config)
+                    .setFetchExecutor(Executors.newFixedThreadPool(5))
+                    .build()
+
+            refresh.value = true
         }
-    }
-
-    override fun loadMore() {
-        searchShop(query.value!!, items.value!!.size + 1)
     }
 
     override fun openDetail(url: String) {
         _navigateToDetail.value = url
-    }
-
-    override fun removeItem(productId: Long): Boolean {
-        items.value = items.value?.filter { item ->
-            item.productId != productId
-        } as MutableList<Item>
-
-        return true
     }
 }
