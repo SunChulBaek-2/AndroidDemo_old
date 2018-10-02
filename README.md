@@ -1,4 +1,4 @@
-# AndroidDemo [![Build Status](https://travis-ci.org/x1210x/AndroidDemo.svg?branch=master)](https://travis-ci.org/x1210x/AndroidDemo)
+# AndroidDemo ![CircleCI (all branches)](https://img.shields.io/circleci/project/github/x1210x/AndroidDemo.svg)
 API 호출 -> 리스트 형태로 출력하는 MVVM 구조의 예제
 * Architecture
   * [Data Binding](https://developer.android.com/topic/libraries/data-binding/)
