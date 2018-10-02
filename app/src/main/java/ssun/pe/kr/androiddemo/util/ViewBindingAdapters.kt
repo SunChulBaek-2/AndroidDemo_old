@@ -1,5 +1,6 @@
 package ssun.pe.kr.androiddemo.util
 
+import android.os.Build
 import androidx.databinding.BindingAdapter
 import android.text.Html
 import android.view.View
@@ -28,8 +29,13 @@ fun webViewUrl(wv: WebView, webViewUrl: String?) {
     wv.loadUrl(webViewUrl)
 }
 
+@Suppress("DEPRECATION")
 @BindingAdapter("lowestPrice")
 fun lowestPrice(tv: TextView, value: Int) {
     val df = DecimalFormat("#,###,###")
-    tv.text = Html.fromHtml("최저 <b>${df.format(value)}</b>원")
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        tv.text = Html.fromHtml("최저 <b>${df.format(value)}</b>원", Html.FROM_HTML_MODE_COMPACT)
+    } else {
+        tv.text = Html.fromHtml("최저 <b>${df.format(value)}</b>원")
+    }
 }

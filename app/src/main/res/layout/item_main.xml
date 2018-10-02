@@ -72,7 +72,7 @@
             app:layout_constraintLeft_toRightOf="@id/clImage"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
             app:layout_constraintVertical_chainStyle="packed"
-            app:lowestPrice="@{(int) Integer.valueOf(item.lprice)}" />
+            app:lowestPrice="@{safeUnbox(Integer.valueOf(item.lprice))}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
