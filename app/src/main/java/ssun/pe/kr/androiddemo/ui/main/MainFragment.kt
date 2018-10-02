@@ -65,13 +65,6 @@ class MainFragment : DaggerFragment() {
         mainViewModel.items.observe(this, Observer { items ->
             adapter.submitList(items)
         })
-
-        // TODO : 검색어 변경 후 검색 결과 업데이트
-        mainViewModel.refresh.observe(this, Observer {
-            mainViewModel.items.observe(this, Observer { items ->
-                adapter.submitList(items)
-            })
-        })
     }
 
     private fun initViews() {

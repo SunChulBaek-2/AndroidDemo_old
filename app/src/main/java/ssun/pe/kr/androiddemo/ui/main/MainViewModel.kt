@@ -2,6 +2,7 @@ package ssun.pe.kr.androiddemo.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -19,28 +20,29 @@ class MainViewModel : ViewModel(), EventActions, CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
+    // TODO :
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
+
+    // 검색
     private val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(20)
+            .setInitialLoadSizeHint(20) // 설정하지 않을 경우 page size * 3
             .setPageSize(20).build()
 
-    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
-    val refresh: MutableLiveData<Boolean> = MutableLiveData()
     val query: MutableLiveData<String> = MutableLiveData()
-    var items: LiveData<PagedList<Item>> = MutableLiveData()
+    private val factory: LiveData<NaverDataFactory> = Transformations.map(query) { NaverDataFactory(it) }
+    private var _items: LiveData<PagedList<Item>> = Transformations.switchMap(factory) {
+        LivePagedListBuilder(it, config)
+                .setFetchExecutor(Executors.newFixedThreadPool(5))
+                .build()
+    }
+    val items: LiveData<PagedList<Item>>
+        get() = _items
 
     /** LiveData for Actions and Events **/
     private val _navigateToDetail = MutableLiveData<String>()
     val navigateToDetail: LiveData<String>
         get() = _navigateToDetail
-
-    init {
-        val naverDataFactory = NaverDataFactory("")
-
-        items = LivePagedListBuilder(naverDataFactory, config)
-                .setFetchExecutor(Executors.newFixedThreadPool(5))
-                .build()
-    }
 
     override fun onCleared() {
         super.onCleared()
@@ -48,18 +50,6 @@ class MainViewModel : ViewModel(), EventActions, CoroutineScope {
         Timber.d("[x1210x] onCleared()")
 
         job.cancel()
-    }
-
-    override fun searchShop() {
-        query.value?.let { query ->
-            val naverDataFactory = NaverDataFactory(query)
-
-            items = LivePagedListBuilder(naverDataFactory, config)
-                    .setFetchExecutor(Executors.newFixedThreadPool(5))
-                    .build()
-
-            refresh.value = true
-        }
     }
 
     override fun openDetail(url: String) {
