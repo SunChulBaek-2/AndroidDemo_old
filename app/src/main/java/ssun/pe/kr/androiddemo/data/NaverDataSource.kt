@@ -17,8 +17,12 @@ class NaverDataSource(
         try {
             GlobalScope.launch {
                 if (query.isNotBlank()) {
-                    val result = naverService.searchShop(query, params.requestedLoadSize, 1, "sim").await()
-                    callback.onResult(result.items, null, 1L + result.items.size)
+                    try {
+                        val result = naverService.searchShop(query, params.requestedLoadSize, 1, "sim").await()
+                        callback.onResult(result.items, null, 1L + result.items.size)
+                    } catch (e: Exception) {
+                        // nothing to do
+                    }
                 }
             }
         } catch (e: Exception) {
@@ -30,8 +34,12 @@ class NaverDataSource(
         try {
             GlobalScope.launch {
                 if (query.isNotBlank()) {
-                    val result = naverService.searchShop(query, params.requestedLoadSize, params.key, "sim").await()
-                    callback.onResult(result.items, params.key + result.items.size)
+                    try {
+                        val result = naverService.searchShop(query, params.requestedLoadSize, params.key, "sim").await()
+                        callback.onResult(result.items, params.key + result.items.size)
+                    } catch (e: Exception) {
+                        // nothing to do
+                    }
                 }
             }
         } catch (e: Exception) {
