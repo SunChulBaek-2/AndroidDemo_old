@@ -1,4 +1,4 @@
-# AndroidDemo ![CircleCI (all branches)](https://img.shields.io/circleci/project/github/x1210x/AndroidDemo.svg)
+# AndroidDemo [![CircleCI (all branches)](https://img.shields.io/circleci/project/github/x1210x/AndroidDemo.svg)](https://circleci.com/gh/x1210x/AndroidDemo)
 API 호출 -> 리스트 형태로 출력하는 MVVM 구조의 예제
 * Architecture
   * [Data Binding](https://developer.android.com/topic/libraries/data-binding/)
