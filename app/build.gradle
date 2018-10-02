@@ -65,6 +65,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:${rootProject.recyclerViewVersion}"
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintLayoutVersion}"
     implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.lifecycleVersion}"
+    implementation "androidx.paging:paging-runtime:${rootProject.pagingVersion}"
 
     // Dagger
     implementation "com.google.dagger:dagger-android:${rootProject.daggerVersion}"
