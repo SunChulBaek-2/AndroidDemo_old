@@ -24,15 +24,15 @@ class MainViewModel : ViewModel(), EventActions, CoroutineScope {
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     // 검색
-    private val config = PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(20) // 설정하지 않을 경우 page size * 3
-            .setPageSize(20).build()
-
     val query: MutableLiveData<String> = MutableLiveData()
-    private val factory: LiveData<NaverDataFactory> = Transformations.map(query) { NaverDataFactory(it) }
-    private var _items: LiveData<PagedList<Item>> = Transformations.switchMap(factory) {
-        LivePagedListBuilder(it, config)
+
+    private var _items: LiveData<PagedList<Item>> = Transformations.switchMap(query) {
+        val config = PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setInitialLoadSizeHint(20) // 설정하지 않을 경우 page size * 3
+                .setPageSize(20).build()
+
+        LivePagedListBuilder(NaverDataFactory(it), config)
                 .setFetchExecutor(Executors.newFixedThreadPool(5))
                 .build()
     }
