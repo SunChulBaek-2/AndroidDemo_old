@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
@@ -30,8 +29,6 @@ class MainFragment : DaggerFragment() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: FragmentMainBinding
     private lateinit var adapter: MainAdapter
-
-    private var isSearchViewOpen = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,18 +73,6 @@ class MainFragment : DaggerFragment() {
 
         binding.toolbar.inflateMenu(R.menu.menu_main)
 
-        binding.toolbar.menu.findItem(R.id.search).setOnActionExpandListener(object: MenuItem.OnActionExpandListener {
-            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
-                isSearchViewOpen = true
-                return true
-            }
-
-            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
-                isSearchViewOpen = false
-                return true
-            }
-        })
-
         (binding.toolbar.menu.findItem(R.id.search).actionView as SearchView).setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 mainViewModel.search(query)
@@ -107,7 +92,7 @@ class MainFragment : DaggerFragment() {
     }
 
     fun onBackPressed(): Boolean {
-        return if (isSearchViewOpen) {
+        return if (!(binding.toolbar.menu.findItem(R.id.search).actionView as SearchView).isIconified) {
             binding.toolbar.menu.findItem(R.id.search).collapseActionView()
             true
         } else {
