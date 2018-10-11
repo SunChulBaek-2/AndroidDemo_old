@@ -24,7 +24,8 @@ class MainViewModel : ViewModel(), EventActions, CoroutineScope {
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     // 검색
-    val query: MutableLiveData<String> = MutableLiveData()
+    val input: MutableLiveData<String> = MutableLiveData()
+    var query: MutableLiveData<String> = MutableLiveData()
 
     private var _items: LiveData<PagedList<Item>> = Transformations.switchMap(query) {
         val config = PagedList.Config.Builder()
@@ -50,6 +51,10 @@ class MainViewModel : ViewModel(), EventActions, CoroutineScope {
         Timber.d("[x1210x] onCleared()")
 
         job.cancel()
+    }
+
+    fun search() {
+        query.value = input.value
     }
 
     override fun openDetail(url: String) {
