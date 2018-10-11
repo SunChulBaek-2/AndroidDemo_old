@@ -24,4 +24,11 @@ class MainActivity : DaggerAppCompatActivity() {
 
         Timber.d("[x1210x] onDestroy()")
     }
+
+    override fun onBackPressed() {
+        // TODO : 이부분은 정리가 필요
+        if (!(supportFragmentManager.findFragmentByTag(MainFragment.TAG) as MainFragment).onBackPressed()) {
+            super.onBackPressed()
+        }
+    }
 }

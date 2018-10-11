@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.android.Main
 import ssun.pe.kr.androiddemo.data.NaverDataFactory
 import ssun.pe.kr.androiddemo.data.model.Item
 import timber.log.Timber
@@ -24,10 +23,9 @@ class MainViewModel : ViewModel(), EventActions, CoroutineScope {
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     // 검색
-    val input: MutableLiveData<String> = MutableLiveData()
-    var query: MutableLiveData<String> = MutableLiveData()
+    private val query: MutableLiveData<String> = MutableLiveData()
 
-    private var _items: LiveData<PagedList<Item>> = Transformations.switchMap(query) {
+    private val _items: LiveData<PagedList<Item>> = Transformations.switchMap(query) {
         val config = PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
                 .setInitialLoadSizeHint(20) // 설정하지 않을 경우 page size * 3
@@ -53,8 +51,8 @@ class MainViewModel : ViewModel(), EventActions, CoroutineScope {
         job.cancel()
     }
 
-    fun search() {
-        query.value = input.value
+    fun search(text: String?) {
+        query.value = text
     }
 
     override fun openDetail(url: String) {
