@@ -1,5 +1,21 @@
 <resources>
 
+    <style name="GoogleSansTextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/google_sans</item>
+    </style>
+    <style name="GoogleSansButtonStyle" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
+        <item name="android:fontFamily">@font/google_sans</item>
+    </style>
+    <style name="GoogleSansEditTextStyle" parent="@android:style/Widget.DeviceDefault.EditText">
+        <item name="android:fontFamily">@font/google_sans</item>
+    </style>
+    <style name="GoogleSansRadioButtonStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.RadioButton">
+        <item name="android:fontFamily">@font/google_sans</item>
+    </style>
+    <style name="GoogleSansCheckboxStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.CheckBox">
+        <item name="android:fontFamily">@font/google_sans</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -9,5 +25,16 @@
 
         <item name="colorControlNormal">@android:color/white</item>
         <item name="android:editTextColor">@android:color/white</item>
+
+        <!-- Google Sans 폰트 적용 -->
+        <item name="buttonStyle">@style/GoogleSansButtonStyle</item>
+        <item name="editTextStyle">@style/GoogleSansEditTextStyle</item>
+        <item name="radioButtonStyle">@style/GoogleSansRadioButtonStyle</item>
+        <item name="checkboxStyle">@style/GoogleSansCheckboxStyle</item>
+        <item name="android:buttonStyle">@style/GoogleSansButtonStyle</item>
+        <item name="android:editTextStyle">@style/GoogleSansEditTextStyle</item>
+        <item name="android:radioButtonStyle">@style/GoogleSansRadioButtonStyle</item>
+        <item name="android:checkboxStyle">@style/GoogleSansCheckboxStyle</item>
+        <item name="android:textViewStyle">@style/GoogleSansTextViewStyle</item>
     </style>
 </resources>
