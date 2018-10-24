@@ -1,7 +1,14 @@
 apply plugin: "com.github.ben-manes.versions"
 
 buildscript {
+    Properties build = new Properties()
+    build.load(new FileInputStream("${rootProject.file('build.properties')}"))
+
     ext {
+        // App version
+        versionCode = Integer.valueOf(build.getProperty("versionCode"))
+        versionName = build.getProperty("versionName")
+
         // Sdk and tools
         minSdkVersion = 21
         targetSdkVersion = 28
