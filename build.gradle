@@ -2,7 +2,7 @@ apply plugin: "com.github.ben-manes.versions"
 
 buildscript {
     Properties build = new Properties()
-    build.load(new FileInputStream("${rootProject.file('build.properties')}"))
+    build.load(new FileInputStream(rootProject.file("build.properties")))
 
     ext {
         // App version
