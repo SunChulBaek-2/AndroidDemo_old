@@ -6,12 +6,14 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import ssun.pe.kr.androiddemo.data.NaverDataFactory
 import ssun.pe.kr.androiddemo.data.model.Item
 import timber.log.Timber
 import java.util.concurrent.Executors
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlin.coroutines.CoroutineContext
 
 class MainViewModel : ViewModel(), EventActions, CoroutineScope {
 

@@ -1,8 +1,8 @@
 package ssun.pe.kr.androiddemo.data
 
 import androidx.paging.PageKeyedDataSource
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import ssun.pe.kr.androiddemo.data.model.Item
 import ssun.pe.kr.androiddemo.network.NaverService
 import ssun.pe.kr.androiddemo.network.RetrofitCreator

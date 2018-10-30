@@ -36,16 +36,10 @@ android {
     }
 }
 
-kotlin {
-    experimental {
-        coroutines 'enable'
-    }
-}
-
 dependencies {
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -72,7 +66,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofitVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.okhttpVersion}"
     implementation "com.google.code.gson:gson:${rootProject.gsonVersion}"
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${rootProject.retrofitCoroutinesAdapterVersion}"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${rootProject.retrofitCoroutinesAdapterVersion}"
 
     // Glide
     implementation "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
