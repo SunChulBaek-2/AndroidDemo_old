@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import dagger.android.support.DaggerAppCompatActivity
+import get
+import set
 import ssun.pe.kr.androiddemo.R
 import timber.log.Timber
 
@@ -14,7 +16,7 @@ class DetailActivity : DaggerAppCompatActivity() {
 
         fun starterIntent(context: Context, url: String?): Intent {
             return Intent(context, DetailActivity::class.java).apply {
-                putExtra(EXTRA_DETAIL_URL, url)
+                this[EXTRA_DETAIL_URL] = url
             }
         }
     }
@@ -26,7 +28,7 @@ class DetailActivity : DaggerAppCompatActivity() {
 
         setContentView(R.layout.activity_detail)
 
-        intent?.getStringExtra(EXTRA_DETAIL_URL)?.let { url ->
+        intent[EXTRA_DETAIL_URL]?.let { url ->
             supportFragmentManager.beginTransaction()
                     .add(R.id.detail_container, DetailFragment.newInstance(url), DetailFragment.TAG)
                     .commit()
