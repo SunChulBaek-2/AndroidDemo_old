@@ -3,6 +3,7 @@ package ssun.pe.kr.androiddemo.ui.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.transaction
 import dagger.android.support.DaggerAppCompatActivity
 import get
 import set
@@ -29,9 +30,9 @@ class DetailActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         intent[EXTRA_DETAIL_URL]?.let { url ->
-            supportFragmentManager.beginTransaction()
-                    .add(R.id.detail_container, DetailFragment.newInstance(url), DetailFragment.TAG)
-                    .commit()
+            supportFragmentManager.transaction {
+                add(R.id.detail_container, DetailFragment.newInstance(url), DetailFragment.TAG)
+            }
         }
     }
 

@@ -48,12 +48,17 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${rootProject.kotlinCoroutinesVersion}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${rootProject.kotlinCoroutinesVersion}"
 
-    // Support Libraries
+    // UI
     implementation "androidx.appcompat:appcompat:${rootProject.appcompatVersion}"
     implementation "androidx.recyclerview:recyclerview:${rootProject.recyclerViewVersion}"
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.constraintLayoutVersion}"
-    implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.lifecycleVersion}"
     implementation "androidx.paging:paging-runtime:${rootProject.pagingVersion}"
+
+    // Architecture Components
+    implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.lifecycleVersion}"
+
+    // Utils
+    implementation "androidx.fragment:fragment-ktx:${rootProject.ktxVersion}"
 
     // Dagger
     implementation "com.google.dagger:dagger-android:${rootProject.daggerVersion}"

@@ -1,6 +1,7 @@
 package ssun.pe.kr.androiddemo.ui.main
 
 import android.os.Bundle
+import androidx.fragment.app.transaction
 import dagger.android.support.DaggerAppCompatActivity
 import ssun.pe.kr.androiddemo.R
 import timber.log.Timber
@@ -14,9 +15,9 @@ class MainActivity : DaggerAppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction()
-                .add(R.id.main_container, MainFragment(), MainFragment.TAG)
-                .commit()
+        supportFragmentManager.transaction {
+            add(R.id.main_container, MainFragment(), MainFragment.TAG)
+        }
     }
 
     override fun onDestroy() {
