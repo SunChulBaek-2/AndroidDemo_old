@@ -15,7 +15,6 @@ import dagger.android.support.DaggerFragment
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.FragmentMainBinding
 import ssun.pe.kr.androiddemo.ui.detail.DetailActivity
-import timber.log.Timber
 import javax.inject.Inject
 
 class MainFragment : DaggerFragment() {
@@ -30,24 +29,12 @@ class MainFragment : DaggerFragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var adapter: MainAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        Timber.d("[x1210x] onCreate()")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        Timber.d("[x1210x] onDestroy()")
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mainViewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
 
         binding = FragmentMainBinding.inflate(inflater, container, false).apply {
-            setLifecycleOwner(this@MainFragment)
+            lifecycleOwner = this@MainFragment
             viewModel = this@MainFragment.mainViewModel
         }
 

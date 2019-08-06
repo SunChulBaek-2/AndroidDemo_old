@@ -6,20 +6,11 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import ssun.pe.kr.androiddemo.data.NaverDataFactory
 import ssun.pe.kr.androiddemo.data.model.Item
-import timber.log.Timber
 import java.util.concurrent.Executors
-import kotlin.coroutines.CoroutineContext
 
-class MainViewModel : ViewModel(), EventActions, CoroutineScope {
-
-    private val job = Job()
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+class MainViewModel : ViewModel(), EventActions {
 
     // TODO :
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
@@ -44,14 +35,6 @@ class MainViewModel : ViewModel(), EventActions, CoroutineScope {
     private val _navigateToDetail = MutableLiveData<String>()
     val navigateToDetail: LiveData<String>
         get() = _navigateToDetail
-
-    override fun onCleared() {
-        super.onCleared()
-
-        Timber.d("[x1210x] onCleared()")
-
-        job.cancel()
-    }
 
     fun search(text: String?) {
         query.value = text

@@ -33,7 +33,7 @@ class MainHolder(
     fun bind(item: Item?) {
         binding.item = item
         binding.eventListener = eventListener
-        binding.setLifecycleOwner(lifecycleOwner)
+        binding.lifecycleOwner = lifecycleOwner
         binding.executePendingBindings()
     }
 }
