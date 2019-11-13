@@ -1,12 +1,12 @@
 package ssun.pe.kr.androiddemo.ui.main
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.transaction
-import dagger.android.support.DaggerAppCompatActivity
 import ssun.pe.kr.androiddemo.R
 import timber.log.Timber
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

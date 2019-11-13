@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_detail.*
 import ssun.pe.kr.androiddemo.databinding.FragmentDetailBinding
 import timber.log.Timber
-import javax.inject.Inject
 
-class DetailFragment : DaggerFragment() {
+class DetailFragment : Fragment() {
 
     companion object {
         const val TAG = "DetailFragment"
@@ -27,8 +26,6 @@ class DetailFragment : DaggerFragment() {
             arguments = args
         }
     }
-
-    @Inject lateinit var viewModelFactory: DetailViewModelFactory
 
     private lateinit var detailViewModel: DetailViewModel
     private lateinit var binding: FragmentDetailBinding
@@ -46,7 +43,7 @@ class DetailFragment : DaggerFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        detailViewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailViewModel::class.java)
+        detailViewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
 
         binding = FragmentDetailBinding.inflate(inflater, container, false).apply {
             setLifecycleOwner(this@DetailFragment)

@@ -60,12 +60,6 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:${rootProject.ktxVersion}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${rootProject.lifecycleVersion}"
 
-    // Dagger
-    implementation "com.google.dagger:dagger-android:${rootProject.daggerVersion}"
-    implementation "com.google.dagger:dagger-android-support:${rootProject.daggerVersion}"
-    kapt "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
-    kapt "com.google.dagger:dagger-android-processor:${rootProject.daggerVersion}"
-
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofitVersion}"

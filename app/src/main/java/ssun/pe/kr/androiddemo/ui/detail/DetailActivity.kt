@@ -3,14 +3,14 @@ package ssun.pe.kr.androiddemo.ui.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.transaction
-import dagger.android.support.DaggerAppCompatActivity
 import get
 import set
 import ssun.pe.kr.androiddemo.R
 import timber.log.Timber
 
-class DetailActivity : DaggerAppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
 
     companion object {
         private const val EXTRA_DETAIL_URL = "EXTRA_DETAIL_URL"
