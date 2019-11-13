@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="ssun.pe.kr.androiddemo.data.model.Item" />
+            type="ssun.pe.kr.androiddemo.model.Item" />
 
         <variable
             name="eventListener"

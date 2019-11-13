@@ -2,9 +2,10 @@ package ssun.pe.kr.androiddemo.data
 
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ssun.pe.kr.androiddemo.data.model.Result
+import ssun.pe.kr.androiddemo.model.Result
 
 interface NaverService {
+
     @GET("shop.json")
     suspend fun searchShop(
         @Query("query") query: String,

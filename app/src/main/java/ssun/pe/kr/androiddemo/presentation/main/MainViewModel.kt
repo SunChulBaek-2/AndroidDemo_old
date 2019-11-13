@@ -1,13 +1,17 @@
 package ssun.pe.kr.androiddemo.presentation.main
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import ssun.pe.kr.androiddemo.data.NaverDataFactory
-import ssun.pe.kr.androiddemo.data.model.Item
+import ssun.pe.kr.androiddemo.model.Item
+import ssun.pe.kr.androiddemo.presentation.BaseViewModel
 import java.util.concurrent.Executors
 
-class MainViewModel : ViewModel(), EventActions {
+class MainViewModel : BaseViewModel(), EventActions {
 
     // TODO :
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()

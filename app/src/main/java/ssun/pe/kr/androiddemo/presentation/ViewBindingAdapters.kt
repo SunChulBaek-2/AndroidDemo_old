@@ -10,7 +10,7 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import ssun.pe.kr.androiddemo.data.model.Item
+import ssun.pe.kr.androiddemo.model.Item
 import ssun.pe.kr.androiddemo.presentation.main.MainAdapter
 import java.text.DecimalFormat
 

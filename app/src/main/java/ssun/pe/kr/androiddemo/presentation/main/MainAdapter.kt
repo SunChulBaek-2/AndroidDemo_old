@@ -6,8 +6,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import ssun.pe.kr.androiddemo.data.model.Item
 import ssun.pe.kr.androiddemo.databinding.ItemMainBinding
+import ssun.pe.kr.androiddemo.model.Item
 
 class MainAdapter(
     private val eventListener: EventActions,

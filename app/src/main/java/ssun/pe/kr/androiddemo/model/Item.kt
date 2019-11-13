@@ -1,4 +1,4 @@
-package ssun.pe.kr.androiddemo.data.model
+package ssun.pe.kr.androiddemo.model
 
 import com.google.gson.annotations.SerializedName
 

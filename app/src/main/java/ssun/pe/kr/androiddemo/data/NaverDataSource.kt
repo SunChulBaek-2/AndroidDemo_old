@@ -3,7 +3,7 @@ package ssun.pe.kr.androiddemo.data
 import androidx.paging.PageKeyedDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import ssun.pe.kr.androiddemo.data.model.Item
+import ssun.pe.kr.androiddemo.model.Item
 
 class NaverDataSource(
     private val scope: CoroutineScope,
