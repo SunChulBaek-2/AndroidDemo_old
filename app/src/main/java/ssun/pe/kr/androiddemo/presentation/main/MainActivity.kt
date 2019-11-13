@@ -7,7 +7,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,11 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.ActivityMainBinding
 import ssun.pe.kr.androiddemo.presentation.BaseActivity
-import ssun.pe.kr.androiddemo.presentation.detail.DetailActivity
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<MainViewModel>() {
 
-    private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,12 +52,6 @@ class MainActivity : BaseActivity() {
                 rvItems.addItemDecoration(deco)
             }
         setObservers()
-    }
-
-    private fun setObservers() {
-        viewModel.navigateToDetail.observe(this, Observer { url ->
-            startActivity(DetailActivity.starterIntent(this, url))
-        })
     }
 
     override fun onBackPressed() {

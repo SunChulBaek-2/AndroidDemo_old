@@ -10,7 +10,7 @@ import ssun.pe.kr.androiddemo.databinding.ItemMainBinding
 import ssun.pe.kr.androiddemo.model.Item
 
 class MainAdapter(
-    private val eventListener: EventActions,
+    private val eventListener: MainViewModel,
     private val lifecycleOwner: LifecycleOwner
 ) : PagedListAdapter<Item, MainHolder>(SessionDiff) {
 
@@ -26,7 +26,7 @@ class MainAdapter(
 
 class MainHolder(
     private val binding: ItemMainBinding,
-    private val eventListener: EventActions,
+    private val eventListener: MainViewModel,
     private val lifecycleOwner: LifecycleOwner
 ) : RecyclerView.ViewHolder(binding.root) {
 

@@ -12,7 +12,7 @@ import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.ActivityDetailBinding
 import ssun.pe.kr.androiddemo.presentation.BaseActivity
 
-class DetailActivity : BaseActivity() {
+class DetailActivity : BaseActivity<DetailViewModel>() {
 
     companion object {
         private const val EXTRA_DETAIL_URL = "EXTRA_DETAIL_URL"
@@ -22,8 +22,6 @@ class DetailActivity : BaseActivity() {
                 putExtra(EXTRA_DETAIL_URL, url)
             }
     }
-
-    private lateinit var viewModel: DetailViewModel
 
     private val url
         get() = intent?.getStringExtra(EXTRA_DETAIL_URL)
@@ -43,6 +41,7 @@ class DetailActivity : BaseActivity() {
                 wvDetail.settings.javaScriptEnabled = true
                 wvDetail.loadUrl(url)
             }
+        setObservers()
     }
 
     private class DetailWebViewClient(
