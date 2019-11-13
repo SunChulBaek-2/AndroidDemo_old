@@ -1,21 +1,22 @@
 package ssun.pe.kr.androiddemo.data
 
 import androidx.paging.PageKeyedDataSource
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import ssun.pe.kr.androiddemo.data.model.Item
 import ssun.pe.kr.androiddemo.network.NaverService
 import ssun.pe.kr.androiddemo.network.RetrofitCreator
 
 class NaverDataSource(
-        private val query: String
+    private val scope: CoroutineScope,
+    private val query: String
 ) : PageKeyedDataSource<Long, Item>() {
 
     private val naverService: NaverService = RetrofitCreator.create().create(NaverService::class.java)
 
     override fun loadInitial(params: LoadInitialParams<Long>, callback: LoadInitialCallback<Long, Item>) {
         try {
-            GlobalScope.launch {
+            scope.launch {
                 if (query.isNotBlank()) {
                     try {
                         val result = naverService.searchShop(query, params.requestedLoadSize, 1, "sim").await()
@@ -26,13 +27,13 @@ class NaverDataSource(
                 }
             }
         } catch (e: Exception) {
-            // nothing to do
+            e.printStackTrace()
         }
     }
 
     override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, Item>) {
         try {
-            GlobalScope.launch {
+            scope.launch {
                 if (query.isNotBlank()) {
                     try {
                         val result = naverService.searchShop(query, params.requestedLoadSize, params.key, "sim").await()
@@ -43,7 +44,7 @@ class NaverDataSource(
                 }
             }
         } catch (e: Exception) {
-             // nothing to do
+             e.printStackTrace()
         }
     }
 
