@@ -6,17 +6,22 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.paging.PagedList
-import androidx.recyclerview.widget.RecyclerView
+import androidx.databinding.InverseBindingAdapter
+import androidx.databinding.InverseBindingListener
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import ssun.pe.kr.androiddemo.model.Item
-import ssun.pe.kr.androiddemo.presentation.main.MainAdapter
 import java.text.DecimalFormat
 
 @BindingAdapter("goneUnless")
 fun goneUnless(view: View, visible: Boolean) {
     view.visibility = if (visible) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("refreshEnabled")
+fun refreshEnabled(swipe: SwipeRefreshLayout, refreshEnabled: Boolean) {
+    swipe.isEnabled = refreshEnabled
 }
 
 @BindingAdapter("imageUrl")
@@ -38,7 +43,44 @@ fun lowestPrice(tv: TextView, value: Int) {
     }
 }
 
-@BindingAdapter("items")
-fun items(rv: RecyclerView, items: PagedList<Item>?) = items?.let {
-    (rv.adapter as? MainAdapter)?.submitList(items)
+// ViewPager =======================================================================================
+@BindingAdapter("current")
+fun setCurrent(vp: ViewPager, current: Int) {
+    vp.currentItem = current
+}
+
+@InverseBindingAdapter(attribute = "current", event = "currentChanged")
+fun getCurrent(vp: ViewPager): Int = vp.currentItem
+
+@BindingAdapter("currentChanged")
+fun currentChanged(vp: ViewPager, listener: InverseBindingListener) {
+    vp.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        override fun onPageScrollStateChanged(state: Int) { }
+
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) { }
+
+        override fun onPageSelected(position: Int) {
+            listener.onChange()
+        }
+    })
+}
+
+// SwipeRefreshLayout ==============================================================================
+@BindingAdapter("isRefreshing")
+fun setIsRefreshing(swipe: SwipeRefreshLayout, isRefreshing: Boolean) {
+    swipe.isRefreshing = isRefreshing
+}
+
+@InverseBindingAdapter(attribute = "isRefreshing", event = "refreshChanged")
+fun getIsRefreshing(swipe: SwipeRefreshLayout): Boolean = swipe.isRefreshing
+
+@BindingAdapter("refreshChanged")
+fun refreshChanged(swipe: SwipeRefreshLayout, listener: InverseBindingListener) {
+    swipe.setOnRefreshListener {
+        listener.onChange()
+    }
 }

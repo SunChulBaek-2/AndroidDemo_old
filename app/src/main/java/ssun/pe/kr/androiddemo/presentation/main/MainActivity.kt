@@ -5,12 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.ActivityMainBinding
 import ssun.pe.kr.androiddemo.presentation.BaseActivity
@@ -31,7 +28,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
                 (toolbar.menu.findItem(R.id.search).actionView as SearchView).setOnQueryTextListener(
                     object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String?): Boolean = query?.let {
-                            this@MainActivity.viewModel.search(query)
+                            this@MainActivity.viewModel.query.value = query
                             hideKeyboard(binding.root.findFocus())
                             true
                         } ?: false
@@ -39,17 +36,18 @@ class MainActivity : BaseActivity<MainViewModel>() {
                         override fun onQueryTextChange(newText: String?): Boolean = false
                     })
 
-                rvItems.layoutManager =
-                    LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
-                rvItems.adapter = MainAdapter(this@MainActivity.viewModel, this@MainActivity)
-                val deco = DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL)
-                deco.setDrawable(
-                    ContextCompat.getDrawable(
-                        this@MainActivity,
-                        R.drawable.main_deco
-                    )!!
-                )
-                rvItems.addItemDecoration(deco)
+                vp.adapter = MainAdapter(supportFragmentManager)
+                // https://stackoverflow.com/questions/25978462/swiperefreshlayout-viewpager-limit-horizontal-scroll-only
+                vp.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) { }
+
+                    override fun onPageSelected(position: Int) { }
+
+                    override fun onPageScrollStateChanged(state: Int) {
+                        swipe.isEnabled = state == ViewPager.SCROLL_STATE_IDLE
+                    }
+                })
+                tab.setupWithViewPager(vp)
             }
         setObservers()
     }

@@ -2,15 +2,25 @@ package ssun.pe.kr.androiddemo.data
 
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ssun.pe.kr.androiddemo.model.Result
+import ssun.pe.kr.androiddemo.model.ImageResult
+import ssun.pe.kr.androiddemo.model.ShopResult
 
 interface NaverService {
+
+    @GET("image")
+    suspend fun searchImage(
+        @Query("query") query: String,
+        @Query("display") display: Int? = null,
+        @Query("start") start: Long? = null,
+        @Query("sort") sort: String? = null,
+        @Query("filter") filter: String? = null
+    ): ImageResult
 
     @GET("shop.json")
     suspend fun searchShop(
         @Query("query") query: String,
-        @Query("display") display: Int?,
-        @Query("start") start: Long?,
-        @Query("sort") sort: String?
-    ): Result
+        @Query("display") display: Int? = null,
+        @Query("start") start: Long? = null,
+        @Query("sort") sort: String? = null
+    ): ShopResult
 }

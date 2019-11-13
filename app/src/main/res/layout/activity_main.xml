@@ -24,27 +24,27 @@
             app:title="@string/app_name"
             app:titleTextColor="@android:color/white" />
 
-        <!-- 스타일의 colorControlNormal 때문에 스크롤바 보이지 않는 것으로 보여 컬러 설정함 -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvItems"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:background="#330000ff" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:fadeScrollbars="false"
-            android:scrollbarSize="5dp"
-            android:scrollbarThumbVertical="?attr/colorAccent"
-            android:scrollbars="vertical"
-            app:items="@{viewModel.items}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+            app:isRefreshing="@={viewModel.isRefreshing()}"
+            app:layout_constraintTop_toBottomOf="@id/tab"
+            app:refreshEnabled="@{viewModel.query != null &amp;&amp; !viewModel.query.isEmpty()}">
 
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:goneUnless="@{safeUnbox(viewModel.isLoading)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:current="@={viewModel.current}" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

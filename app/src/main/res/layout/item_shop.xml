@@ -7,11 +7,11 @@
 
         <variable
             name="item"
-            type="ssun.pe.kr.androiddemo.model.Item" />
+            type="ssun.pe.kr.androiddemo.model.ShopItem" />
 
         <variable
             name="eventListener"
-            type="ssun.pe.kr.androiddemo.presentation.main.MainViewModel" />
+            type="ssun.pe.kr.androiddemo.presentation.EventActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

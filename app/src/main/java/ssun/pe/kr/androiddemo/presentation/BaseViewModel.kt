@@ -4,13 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-open class BaseViewModel : ViewModel() {
+interface EventActions {
+    fun openDetail(url: String)
+}
+
+open class BaseViewModel : ViewModel(), EventActions {
 
     private val _openDetail = MutableLiveData<String>()
     val openDetail: LiveData<String>
         get() = _openDetail
 
-    fun openDetail(url: String) {
+    override fun openDetail(url: String) {
         _openDetail.value = url
     }
 }

@@ -11,3 +11,5 @@ API 호출 -> 리스트 형태로 출력하는 MVVM 구조의 예제
   * ~[Kotlin Coroutine Adapter](https://github.com/JakeWharton/retrofit2-kotlin-coroutines-adapter)~ (by [Retrofit suspend support](https://github.com/square/retrofit/blob/master/CHANGELOG.md#version-260-2019-06-05))
   * [Retrofit](https://github.com/square/retrofit)
   * [Timber](https://github.com/JakeWharton/timber)
+* 레퍼런스
+  * https://stackoverflow.com/questions/25978462/swiperefreshlayout-viewpager-limit-horizontal-scroll-only
