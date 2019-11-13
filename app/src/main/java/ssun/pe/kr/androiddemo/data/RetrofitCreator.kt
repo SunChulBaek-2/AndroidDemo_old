@@ -1,6 +1,5 @@
 package ssun.pe.kr.androiddemo.data
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -14,7 +13,6 @@ class RetrofitCreator {
     companion object {
         fun create(): Retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.NaverApiUrl)
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .client(OkHttpClient.Builder()
                 .addInterceptor(object : Interceptor {
