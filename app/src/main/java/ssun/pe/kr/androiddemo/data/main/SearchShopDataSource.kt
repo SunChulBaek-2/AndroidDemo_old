@@ -18,31 +18,27 @@ class SearchShopDataSource(
         callback: LoadInitialCallback<Long, Item>
     ) {
         scope.launch {
-            if (query.isNotBlank()) {
-                try {
-                    val result = repository.searchShop(query, params.requestedLoadSize, 1, "sim")
-                    callback.onResult(result.items, null, 1L + result.items.size)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+            try {
+                val result = repository.searchShop(query, params.requestedLoadSize, 1, "sim")
+                callback.onResult(result.items, null, 1L + result.items.size)
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
 
     override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, Item>) {
         scope.launch {
-            if (query.isNotBlank()) {
-                try {
-                    val result = repository.searchShop(
-                        query,
-                        params.requestedLoadSize,
-                        params.key,
-                        "sim"
-                    )
-                    callback.onResult(result.items, params.key + result.items.size)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+            try {
+                val result = repository.searchShop(
+                    query,
+                    params.requestedLoadSize,
+                    params.key,
+                    "sim"
+                )
+                callback.onResult(result.items, params.key + result.items.size)
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

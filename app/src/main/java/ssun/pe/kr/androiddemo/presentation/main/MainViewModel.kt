@@ -21,8 +21,10 @@ class MainViewModel : BaseViewModel() {
         get() = _items
 
     fun search(query: String) = viewModelScope.launch {
-        _items.addSource(searchShopUseCase.execute(query)) { items ->
-            _items.value = items
+        if (query.isNotBlank()) {
+            _items.addSource(searchShopUseCase.execute(query)) { items ->
+                _items.value = items
+            }
         }
     }
 }
