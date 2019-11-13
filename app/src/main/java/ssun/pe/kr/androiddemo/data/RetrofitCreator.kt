@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ssun.pe.kr.androiddemo.BuildConfig
 
 class RetrofitCreator {
+
     companion object {
         fun create(): Retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.NaverApiUrl)

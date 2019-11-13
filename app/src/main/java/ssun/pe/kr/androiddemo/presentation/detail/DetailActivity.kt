@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.ActivityDetailBinding
 import ssun.pe.kr.androiddemo.presentation.BaseActivity
@@ -23,7 +23,7 @@ class DetailActivity : BaseActivity() {
             }
     }
 
-    private lateinit var detailViewModel: DetailViewModel
+    private lateinit var viewModel: DetailViewModel
 
     private val url
         get() = intent?.getStringExtra(EXTRA_DETAIL_URL)
@@ -31,15 +31,15 @@ class DetailActivity : BaseActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        detailViewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java).apply {
+        viewModel = ViewModelProvider(this).get(DetailViewModel::class.java).apply {
             isLoading.value = true
         }
         DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
             .apply {
                 lifecycleOwner = this@DetailActivity
-                viewModel = this@DetailActivity.detailViewModel
+                viewModel = this@DetailActivity.viewModel
 
-                wvDetail.webViewClient = DetailWebViewClient(detailViewModel)
+                wvDetail.webViewClient = DetailWebViewClient(this@DetailActivity.viewModel)
                 wvDetail.settings.javaScriptEnabled = true
                 wvDetail.loadUrl(url)
             }
@@ -48,6 +48,7 @@ class DetailActivity : BaseActivity() {
     private class DetailWebViewClient(
         private val detailViewModel: DetailViewModel
     ) : WebViewClient() {
+
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
             detailViewModel.isLoading.value = false

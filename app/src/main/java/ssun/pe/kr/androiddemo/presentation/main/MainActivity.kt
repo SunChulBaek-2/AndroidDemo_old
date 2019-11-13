@@ -5,7 +5,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,29 +16,29 @@ import ssun.pe.kr.androiddemo.presentation.detail.DetailActivity
 
 class MainActivity : BaseActivity() {
 
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
             lifecycleOwner = this@MainActivity
-            viewModel = this@MainActivity.mainViewModel
+            viewModel = this@MainActivity.viewModel
 
             toolbar.inflateMenu(R.menu.menu_main)
             (toolbar.menu.findItem(R.id.search).actionView as SearchView).setOnQueryTextListener(
                 object : SearchView.OnQueryTextListener {
-                    override fun onQueryTextSubmit(query: String?): Boolean {
-                        mainViewModel.search(query)
-                        return true
-                    }
+                    override fun onQueryTextSubmit(query: String?): Boolean = query?.let {
+                        this@MainActivity.viewModel.search(query)
+                        true
+                    } ?: false
 
                     override fun onQueryTextChange(newText: String?): Boolean = false
                 })
 
             rvItems.layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
-            rvItems.adapter = MainAdapter(mainViewModel, this@MainActivity)
+            rvItems.adapter = MainAdapter(this@MainActivity.viewModel, this@MainActivity)
             val deco = DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL)
             deco.setDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.main_deco)!!)
             rvItems.addItemDecoration(deco)
@@ -47,7 +47,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setObservers() {
-        mainViewModel.navigateToDetail.observe(this, Observer { url ->
+        viewModel.navigateToDetail.observe(this, Observer { url ->
             startActivity(DetailActivity.starterIntent(this, url))
         })
     }
