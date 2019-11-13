@@ -1,12 +1,12 @@
-package ssun.pe.kr.androiddemo.ui.main
+package ssun.pe.kr.androiddemo.presentation.main
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.transaction
+import androidx.fragment.app.commit
 import ssun.pe.kr.androiddemo.R
+import ssun.pe.kr.androiddemo.presentation.BaseActivity
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.transaction {
+        supportFragmentManager.commit {
             add(R.id.main_container, MainFragment(), MainFragment.TAG)
         }
     }

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="ssun.pe.kr.androiddemo.ui.detail.DetailViewModel" />
+            type="ssun.pe.kr.androiddemo.presentation.detail.DetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,8 +16,7 @@
         <WebView
             android:id="@+id/wvDetail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:webViewUrl="@{viewModel.url}" />
+            android:layout_height="match_parent" />
 
         <ProgressBar
             android:id="@+id/pb"

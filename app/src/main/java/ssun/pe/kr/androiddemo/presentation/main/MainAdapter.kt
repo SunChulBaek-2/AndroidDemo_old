@@ -1,17 +1,17 @@
-package ssun.pe.kr.androiddemo.ui.main
+package ssun.pe.kr.androiddemo.presentation.main
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import ssun.pe.kr.androiddemo.data.model.Item
 import ssun.pe.kr.androiddemo.databinding.ItemMainBinding
 
 class MainAdapter(
-        private val eventListener: EventActions,
-        private val lifecycleOwner: LifecycleOwner
+    private val eventListener: EventActions,
+    private val lifecycleOwner: LifecycleOwner
 ) : PagedListAdapter<Item, MainHolder>(SessionDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -25,9 +25,9 @@ class MainAdapter(
 }
 
 class MainHolder(
-        private val binding: ItemMainBinding,
-        private val eventListener: EventActions,
-        private val lifecycleOwner: LifecycleOwner
+    private val binding: ItemMainBinding,
+    private val eventListener: EventActions,
+    private val lifecycleOwner: LifecycleOwner
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Item?) {

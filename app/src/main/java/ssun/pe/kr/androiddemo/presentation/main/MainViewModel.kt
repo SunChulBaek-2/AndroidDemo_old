@@ -1,4 +1,4 @@
-package ssun.pe.kr.androiddemo.ui.main
+package ssun.pe.kr.androiddemo.presentation.main
 
 import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
@@ -17,13 +17,13 @@ class MainViewModel : ViewModel(), EventActions {
 
     private val _items: LiveData<PagedList<Item>> = Transformations.switchMap(query) {
         val config = PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setInitialLoadSizeHint(20) // 설정하지 않을 경우 page size * 3
-                .setPageSize(20).build()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(20) // 설정하지 않을 경우 page size * 3
+            .setPageSize(20).build()
 
         LivePagedListBuilder(NaverDataFactory(viewModelScope, it), config)
-                .setFetchExecutor(Executors.newFixedThreadPool(5))
-                .build()
+            .setFetchExecutor(Executors.newFixedThreadPool(5))
+            .build()
     }
     val items: LiveData<PagedList<Item>>
         get() = _items

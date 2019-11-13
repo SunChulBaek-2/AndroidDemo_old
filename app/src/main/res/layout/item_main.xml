@@ -11,7 +11,7 @@
 
         <variable
             name="eventListener"
-            type="ssun.pe.kr.androiddemo.ui.main.EventActions" />
+            type="ssun.pe.kr.androiddemo.presentation.main.EventActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

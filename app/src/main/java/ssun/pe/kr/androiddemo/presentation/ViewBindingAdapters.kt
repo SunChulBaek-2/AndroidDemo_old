@@ -1,14 +1,17 @@
-package ssun.pe.kr.androiddemo.util
+package ssun.pe.kr.androiddemo.presentation
 
 import android.os.Build
-import androidx.databinding.BindingAdapter
 import android.text.Html
 import android.view.View
-import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.BindingAdapter
+import androidx.paging.PagedList
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import ssun.pe.kr.androiddemo.data.model.Item
+import ssun.pe.kr.androiddemo.presentation.main.MainAdapter
 import java.text.DecimalFormat
 
 @BindingAdapter("goneUnless")
@@ -24,11 +27,6 @@ fun imageUrl(iv: ImageView, imageUrl: String?) {
             .into(iv)
 }
 
-@BindingAdapter("webViewUrl")
-fun webViewUrl(wv: WebView, webViewUrl: String?) {
-    wv.loadUrl(webViewUrl)
-}
-
 @Suppress("DEPRECATION")
 @BindingAdapter("lowestPrice")
 fun lowestPrice(tv: TextView, value: Int) {
@@ -38,4 +36,9 @@ fun lowestPrice(tv: TextView, value: Int) {
     } else {
         tv.text = Html.fromHtml("최저 <b>${df.format(value)}</b>원")
     }
+}
+
+@BindingAdapter("items")
+fun items(rv: RecyclerView, items: PagedList<Item>?) = items?.let {
+    (rv.adapter as? MainAdapter)?.submitList(items)
 }
