@@ -69,5 +69,13 @@ class ShopFragment : BaseFragment<ShopViewModel>() {
         viewModel.items.observe(viewLifecycleOwner, Observer {
             mainViewModel.isRefreshing.value = false
         })
+
+        viewModel.refrefhState.observe(viewLifecycleOwner, Observer {
+            // TODO
+        })
+
+        viewModel.networkState.observe(viewLifecycleOwner, Observer {
+            // TODO
+        })
     }
 }

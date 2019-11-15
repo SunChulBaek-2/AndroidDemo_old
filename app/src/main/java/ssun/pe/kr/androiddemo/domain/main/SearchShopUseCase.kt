@@ -1,37 +1,41 @@
 package ssun.pe.kr.androiddemo.domain.main
 
-import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
-import androidx.paging.LivePagedListBuilder
+import androidx.lifecycle.Transformations
 import androidx.paging.PagedList
+import androidx.paging.toLiveData
 import kotlinx.coroutines.CoroutineScope
-import ssun.pe.kr.androiddemo.data.main.SearchShopDataSource
+import ssun.pe.kr.androiddemo.data.main.SearchShopFactory
+import ssun.pe.kr.androiddemo.domain.Listing
 import ssun.pe.kr.androiddemo.domain.UseCase
 import ssun.pe.kr.androiddemo.model.ShopItem
 import java.util.concurrent.Executors
 
 class SearchShopUseCase(
     private val scope: CoroutineScope
-) : UseCase<String, LiveData<PagedList<ShopItem>>>() {
+) : UseCase<String, Listing<ShopItem>>() {
 
-    private lateinit var dataSource: SearchShopDataSource
-
-    override suspend fun execute(p: String): LiveData<PagedList<ShopItem>> {
-        return LivePagedListBuilder(
-            object : DataSource.Factory<Long, ShopItem>() {
-                override fun create(): DataSource<Long, ShopItem> {
-                    return SearchShopDataSource(scope, p).apply {
-                        dataSource = this
-                    }
-                }
-            }, PagedList.Config.Builder()
+    override fun execute(p: String): Listing<ShopItem> {
+        val sourceFactory = SearchShopFactory(scope, p)
+        val livePagedList = sourceFactory.toLiveData(
+            config = PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
                 .setInitialLoadSizeHint(20) // 설정하지 않을 경우 page size * 3
-                .setPageSize(20).build()
+                .setPageSize(20).build(),
+            fetchExecutor = Executors.newFixedThreadPool(5)
         )
-            .setFetchExecutor(Executors.newFixedThreadPool(5))
-            .build()
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
+        }
+        return Listing(
+            pagedList = livePagedList,
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.networkState
+            },
+            retry = { },
+            refresh = {
+                sourceFactory.sourceLiveData.value?.invalidate()
+            },
+            refreshState = refreshState
+        )
     }
-
-    fun refresh() = dataSource.invalidate()
 }

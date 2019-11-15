@@ -60,6 +60,7 @@ dependencies {
     // Utils
     implementation "androidx.fragment:fragment-ktx:${rootProject.ktxVersion}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${rootProject.lifecycleVersion}"
+    implementation "androidx.paging:paging-runtime-ktx:${rootProject.pagingVersion}"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"

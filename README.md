@@ -12,4 +12,5 @@ API 호출 -> 리스트 형태로 출력하는 MVVM 구조의 예제
   * [Retrofit](https://github.com/square/retrofit)
   * [Timber](https://github.com/JakeWharton/timber)
 * 레퍼런스
-  * https://stackoverflow.com/questions/25978462/swiperefreshlayout-viewpager-limit-horizontal-scroll-only
+  * [SwipeRefreshLayout + ViewPager](https://stackoverflow.com/questions/25978462/swiperefreshlayout-viewpager-limit-horizontal-scroll-only)
+  * [Paging Library error handling](https://github.com/android/architecture-components-samples/tree/master/PagingWithNetworkSample)

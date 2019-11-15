@@ -1,28 +1,31 @@
 package ssun.pe.kr.androiddemo.presentation.main
 
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations.map
+import androidx.lifecycle.Transformations.switchMap
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagedList
 import kotlinx.coroutines.launch
 import ssun.pe.kr.androiddemo.domain.main.SearchImageUseCase
-import ssun.pe.kr.androiddemo.model.ImageItem
 import ssun.pe.kr.androiddemo.presentation.BaseViewModel
 
 class ImageViewModel : BaseViewModel() {
 
     private val searchImageUseCase = SearchImageUseCase(viewModelScope)
 
-    private val _items = MediatorLiveData<PagedList<ImageItem>>()
-    val items
-        get() = _items
+    private val query = MutableLiveData<String>()
 
-    fun refresh() = searchImageUseCase.refresh()
+    private val result = map(query) { query ->
+        searchImageUseCase.execute(query)
+    }
+    val items = switchMap(result) { it.pagedList }
+    val networkState = switchMap(result) { it.networkState }
+    val refrefhState = switchMap(result) { it.refreshState }
+
+    fun refresh() = result.value?.refresh?.invoke()
 
     fun search(query: String) = viewModelScope.launch {
         if (query.isNotBlank()) {
-            _items.addSource(searchImageUseCase.execute(query)) { items ->
-                _items.value = items
-            }
+            this@ImageViewModel.query.value = query
         }
     }
 }

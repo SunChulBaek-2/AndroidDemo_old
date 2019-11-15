@@ -8,7 +8,7 @@ abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
 
     protected lateinit var viewModel: T
 
-    protected fun setObservers() {
+    protected open fun setObservers() {
         viewModel.openDetail.observe(this, Observer { url ->
             startActivity(DetailActivity.starterIntent(this, url))
         })
