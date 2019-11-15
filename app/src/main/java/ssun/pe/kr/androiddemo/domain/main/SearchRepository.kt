@@ -1,5 +1,6 @@
 package ssun.pe.kr.androiddemo.domain.main
 
+import ssun.pe.kr.androiddemo.model.ErrataResult
 import ssun.pe.kr.androiddemo.model.ImageResult
 import ssun.pe.kr.androiddemo.model.ShopResult
 
@@ -14,4 +15,8 @@ interface SearchRepository {
         sort: String?,
         filter: String?
     ): ImageResult
+
+    suspend fun errata(
+        query: String
+    ): ErrataResult
 }

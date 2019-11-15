@@ -2,6 +2,7 @@ package ssun.pe.kr.androiddemo.data.main
 
 import ssun.pe.kr.androiddemo.data.Naver
 import ssun.pe.kr.androiddemo.domain.main.SearchRepository
+import ssun.pe.kr.androiddemo.model.ErrataResult
 import ssun.pe.kr.androiddemo.model.ImageResult
 import ssun.pe.kr.androiddemo.model.ShopResult
 
@@ -23,4 +24,6 @@ class DefaultSearchRepository : SearchRepository {
         sort: String?,
         filter: String?
     ): ImageResult = apiService.searchImage(query, display, start, sort, filter)
+
+    override suspend fun errata(query: String): ErrataResult = apiService.errata(query)
 }

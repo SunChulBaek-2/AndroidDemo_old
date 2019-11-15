@@ -6,11 +6,13 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.ActivityMainBinding
 import ssun.pe.kr.androiddemo.presentation.BaseActivity
+import timber.log.Timber
 
 class MainActivity : BaseActivity<MainViewModel>() {
 
@@ -33,7 +35,10 @@ class MainActivity : BaseActivity<MainViewModel>() {
                             true
                         } ?: false
 
-                        override fun onQueryTextChange(newText: String?): Boolean = false
+                        override fun onQueryTextChange(newText: String?): Boolean {
+                            this@MainActivity.viewModel.input.value = newText
+                            return false
+                        }
                     })
 
                 vp.adapter = MainAdapter(supportFragmentManager)
@@ -50,6 +55,18 @@ class MainActivity : BaseActivity<MainViewModel>() {
                 tab.setupWithViewPager(vp)
             }
         setObservers()
+    }
+
+    override fun setObservers() {
+        super.setObservers()
+
+        viewModel.errata.observe(this, Observer {
+            Timber.d("errata = ${it.errata}")
+        })
+
+        viewModel.networkState.observe(this, Observer {
+            Timber.d("networkState = ${it.status.name}")
+        })
     }
 
     override fun onBackPressed() {
