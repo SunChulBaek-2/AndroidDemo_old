@@ -5,9 +5,9 @@ import androidx.paging.PageKeyedDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import ssun.pe.kr.androiddemo.domain.NetworkState
 import ssun.pe.kr.androiddemo.domain.main.SearchRepository
 import ssun.pe.kr.androiddemo.model.ImageItem
+import ssun.pe.kr.androiddemo.presentation.NetworkState
 
 class SearchImageDataSource(
     private val scope: CoroutineScope,

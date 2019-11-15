@@ -5,9 +5,9 @@ import androidx.paging.PagedList
 import androidx.paging.toLiveData
 import kotlinx.coroutines.CoroutineScope
 import ssun.pe.kr.androiddemo.data.main.SearchImageFactory
-import ssun.pe.kr.androiddemo.domain.Listing
 import ssun.pe.kr.androiddemo.domain.UseCase
 import ssun.pe.kr.androiddemo.model.ImageItem
+import ssun.pe.kr.androiddemo.presentation.Listing
 import java.util.concurrent.Executors
 
 class SearchImageUseCase(

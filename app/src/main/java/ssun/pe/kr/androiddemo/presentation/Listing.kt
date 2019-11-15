@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ssun.pe.kr.androiddemo.domain
+package ssun.pe.kr.androiddemo.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
