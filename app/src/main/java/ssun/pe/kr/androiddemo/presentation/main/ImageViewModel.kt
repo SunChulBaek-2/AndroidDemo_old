@@ -1,31 +1,36 @@
 package ssun.pe.kr.androiddemo.presentation.main
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations.map
-import androidx.lifecycle.Transformations.switchMap
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import androidx.paging.PagedList
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import ssun.pe.kr.androiddemo.domain.main.SearchImageUseCase
+import ssun.pe.kr.androiddemo.model.ImageItem
 import ssun.pe.kr.androiddemo.presentation.BaseViewModel
 
 class ImageViewModel : BaseViewModel() {
 
-    private val searchImageUseCase = SearchImageUseCase(viewModelScope)
+    private val disposables = CompositeDisposable()
 
-    private val query = MutableLiveData<String>()
+    private val searchImageUseCase = SearchImageUseCase(disposables)
 
-    private val result = map(query) { query ->
-        searchImageUseCase.execute(query)
-    }
-    val items = switchMap(result) { it.pagedList }
-    val networkState = switchMap(result) { it.networkState }
-    val refrefhState = switchMap(result) { it.refreshState }
+    private val _items = MutableLiveData<PagedList<ImageItem>>()
+    val items
+        get() = _items
 
-    fun refresh() = result.value?.refresh?.invoke()
+    fun refresh() = searchImageUseCase.refresh()
 
-    fun search(query: String) = viewModelScope.launch {
-        if (query.isNotBlank()) {
-            this@ImageViewModel.query.value = query
-        }
-    }
+    fun search(query: String) = searchImageUseCase.execute(query)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeBy(onNext = { items ->
+            _items.value = items
+        }, onComplete = {
+
+        }, onError = { e ->
+            e.printStackTrace()
+        }).addTo(disposables)
 }

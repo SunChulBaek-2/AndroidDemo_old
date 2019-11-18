@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import ssun.pe.kr.androiddemo.BuildConfig
 
@@ -14,6 +15,7 @@ class RetrofitCreator {
         fun create(): Retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.NaverApiUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(OkHttpClient.Builder()
                 .addInterceptor(object : Interceptor {
                     override fun intercept(chain: Interceptor.Chain): Response {

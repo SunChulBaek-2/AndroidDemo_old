@@ -1,22 +1,21 @@
 package ssun.pe.kr.androiddemo.domain.main
 
+import io.reactivex.Single
 import ssun.pe.kr.androiddemo.model.ErrataResult
 import ssun.pe.kr.androiddemo.model.ImageResult
 import ssun.pe.kr.androiddemo.model.ShopResult
 
 interface SearchRepository {
 
-    suspend fun searchShop(query: String, display: Int?, start: Long?, sort: String?): ShopResult
+    fun searchShop(query: String, display: Int?, start: Long?, sort: String?): Single<ShopResult>
 
-    suspend fun searchImage(
+    fun searchImage(
         query: String,
         display: Int?,
         start: Long?,
         sort: String?,
         filter: String?
-    ): ImageResult
+    ): Single<ImageResult>
 
-    suspend fun errata(
-        query: String
-    ): ErrataResult
+    fun errata(query: String): Single<ErrataResult>
 }

@@ -36,7 +36,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
                         } ?: false
 
                         override fun onQueryTextChange(newText: String?): Boolean {
-                            this@MainActivity.viewModel.input.value = newText
+                            this@MainActivity.viewModel.getErrata(newText)
                             return false
                         }
                     })

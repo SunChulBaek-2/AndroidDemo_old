@@ -49,6 +49,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
 
+    // Rx
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+
     // UI
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
@@ -63,10 +68,12 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$ktxVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+    implementation "androidx.paging:paging-rxjava2:$pagingVersion"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
 
