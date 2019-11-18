@@ -1,4 +1,4 @@
-# AndroidDemo [![CircleCI (all branches)](https://img.shields.io/circleci/project/github/x1210x/AndroidDemo.svg)](https://circleci.com/gh/x1210x/AndroidDemo)
+# AndroidDemo [![CircleCI](https://img.shields.io/circleci/build/github/x1210x/AndroidDemo/rxjava)](https://github.com/x1210x/AndroidDemo/tree/rxjava)
 * API 호출과 에러 핸들링
   * Paging Library 연동 : [쇼핑](https://developers.naver.com/docs/search/shopping/), [이미지](https://developers.naver.com/docs/search/image/) API
     * [Paging With Network Sample](https://github.com/android/architecture-components-samples/tree/master/PagingWithNetworkSample)의 [Listing](https://github.com/android/architecture-components-samples/blob/master/PagingWithNetworkSample/lib/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/repository/Listing.kt) 클래스 사용
