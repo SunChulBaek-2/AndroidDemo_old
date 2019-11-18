@@ -10,10 +10,11 @@
   * [Paging](https://developer.android.com/topic/libraries/architecture/paging/)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * 라이브러리
-  * [Coroutines](https://kotlinlang.org/docs/reference/coroutines.html)
   * [Glide](https://github.com/bumptech/glide)
-  * ~[Kotlin Coroutine Adapter](https://github.com/JakeWharton/retrofit2-kotlin-coroutines-adapter)~ (by [Retrofit suspend support](https://github.com/square/retrofit/blob/master/CHANGELOG.md#version-260-2019-06-05))
   * [Retrofit](https://github.com/square/retrofit)
+  * [RxAndroid](https://github.com/ReactiveX/RxAndroid)
+  * [RxJava](https://github.com/ReactiveX/RxJava)
+  * [RxKotlin](https://github.com/ReactiveX/RxKotlin)
   * [Timber](https://github.com/JakeWharton/timber)
 * 레퍼런스
   * [SwipeRefreshLayout + ViewPager](https://stackoverflow.com/questions/25978462/swiperefreshlayout-viewpager-limit-horizontal-scroll-only)
