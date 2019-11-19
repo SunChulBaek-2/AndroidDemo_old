@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ssun.pe.kr.androiddemo.presentation
+package ssun.pe.kr.androiddemo.result
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
@@ -33,5 +33,6 @@ data class Listing<T>(
     // refreshes the whole data and fetches it from scratch.
     val refresh: () -> Unit,
     // retries any failed requests.
-    val retry: () -> Unit
+    val retry: () -> Unit,
+    val clearCoroutineJobs: () -> Unit
 )

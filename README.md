@@ -10,11 +10,15 @@
   * [Paging](https://developer.android.com/topic/libraries/architecture/paging/)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * 라이브러리
-  * [Coroutines](https://kotlinlang.org/docs/reference/coroutines.html)
+  * [Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines.html)
   * [Glide](https://github.com/bumptech/glide)
   * ~[Kotlin Coroutine Adapter](https://github.com/JakeWharton/retrofit2-kotlin-coroutines-adapter)~ (by [Retrofit suspend support](https://github.com/square/retrofit/blob/master/CHANGELOG.md#version-260-2019-06-05))
   * [Retrofit](https://github.com/square/retrofit)
   * [Timber](https://github.com/JakeWharton/timber)
 * 레퍼런스
-  * [SwipeRefreshLayout + ViewPager](https://stackoverflow.com/questions/25978462/swiperefreshlayout-viewpager-limit-horizontal-scroll-only)
+  * [Android Dev Summit app](https://github.com/google/iosched/tree/adssched2019)
+    * [UseCase](https://github.com/google/iosched/blob/adssched2019/shared/src/main/java/com/google/samples/apps/iosched/shared/domain/UseCase.kt)
+    * [FlowUseCase](https://github.com/google/iosched/blob/adssched2019/shared/src/main/java/com/google/samples/apps/iosched/shared/domain/FlowUseCase.kt)
   * [Paging With Network Sample](https://github.com/android/architecture-components-samples/tree/master/PagingWithNetworkSample)
+    * [Listing](https://github.com/android/architecture-components-samples/blob/master/PagingWithNetworkSample/lib/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/repository/Listing.kt)
+  * [SwipeRefreshLayout + ViewPager](https://stackoverflow.com/questions/25978462/swiperefreshlayout-viewpager-limit-horizontal-scroll-only)

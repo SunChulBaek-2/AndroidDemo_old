@@ -72,11 +72,11 @@ class ShopFragment : BaseFragment<ShopViewModel>() {
         })
 
         viewModel.refreshState.observe(viewLifecycleOwner, Observer {
-            Timber.d("shop refreshState = $it")
+            Timber.d("[x1210x] shop refreshState = $it")
         })
 
         viewModel.networkState.observe(viewLifecycleOwner, Observer {
-            Timber.d("shop networkState = $it")
+            Timber.d("[x1210x] shop networkState = $it")
         })
     }
 }

@@ -4,18 +4,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import ssun.pe.kr.androiddemo.domain.main.SearchRepository
 import ssun.pe.kr.androiddemo.model.ImageItem
-import ssun.pe.kr.androiddemo.presentation.NetworkState
+import ssun.pe.kr.androiddemo.result.NetworkState
+import timber.log.Timber
 
 class SearchImageDataSource(
-    private val scope: CoroutineScope,
     private val query: String
 ) : PageKeyedDataSource<Long, ImageItem>() {
 
     private val repository: SearchRepository = DefaultSearchRepository()
+
+    private val completableJob = Job()
+    private val coroutineScope = CoroutineScope(Dispatchers.IO + completableJob) //coroutine scope
 
     /**
      * There is no sync on the state because paging will always call loadInitial first then wait
@@ -32,7 +36,7 @@ class SearchImageDataSource(
         params: LoadInitialParams<Long>,
         callback: LoadInitialCallback<Long, ImageItem>
     ) {
-        scope.launch(Dispatchers.IO) {
+        coroutineScope.launch(Dispatchers.IO) {
             // update network states.
             // we also provide an initial load state to the listeners so that the UI can know when the
             // very first list is loaded.
@@ -60,7 +64,7 @@ class SearchImageDataSource(
     }
 
     override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, ImageItem>) {
-        scope.launch(Dispatchers.IO) {
+        coroutineScope.launch(Dispatchers.IO) {
             // set network value to loading.
             networkState.postValue(NetworkState.LOADING)
             try {
@@ -79,5 +83,15 @@ class SearchImageDataSource(
 
     override fun loadBefore(params: LoadParams<Long>, callback: LoadCallback<Long, ImageItem>) {
         // nothing to do
+    }
+
+    fun clearCoroutineJobs() {
+        Timber.d("[x1210x] image clear coroutine jobs")
+        completableJob.cancel()
+    }
+
+    override fun invalidate() {
+        super.invalidate()
+        clearCoroutineJobs()
     }
 }

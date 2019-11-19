@@ -3,21 +3,16 @@ package ssun.pe.kr.androiddemo.domain.main
 import androidx.lifecycle.Transformations
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
 import ssun.pe.kr.androiddemo.data.main.SearchShopFactory
-import ssun.pe.kr.androiddemo.domain.UseCase
+import ssun.pe.kr.androiddemo.domain.ListingUseCase
 import ssun.pe.kr.androiddemo.model.ShopItem
-import ssun.pe.kr.androiddemo.presentation.Listing
+import ssun.pe.kr.androiddemo.result.Listing
 import java.util.concurrent.Executors
 
-class SearchShopUseCase(
-    private val scope: CoroutineScope,
-    coroutineDispatcher: CoroutineDispatcher
-) : UseCase<String, Listing<ShopItem>>(coroutineDispatcher) {
+class SearchShopUseCase : ListingUseCase<String, ShopItem>() {
 
     override fun execute(p: String): Listing<ShopItem> {
-        val sourceFactory = SearchShopFactory(scope, p)
+        val sourceFactory = SearchShopFactory(p)
         val livePagedList = sourceFactory.toLiveData(
             config = PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
@@ -25,9 +20,6 @@ class SearchShopUseCase(
                 .setPageSize(20).build(),
             fetchExecutor = Executors.newFixedThreadPool(5)
         )
-        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-            it.initialLoad
-        }
         return Listing(
             pagedList = livePagedList,
             networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
@@ -37,7 +29,12 @@ class SearchShopUseCase(
             refresh = {
                 sourceFactory.sourceLiveData.value?.invalidate()
             },
-            refreshState = refreshState
+            refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.initialLoad
+            },
+            clearCoroutineJobs = {
+                sourceFactory.sourceLiveData.value?.clearCoroutineJobs()
+            }
         )
     }
 }

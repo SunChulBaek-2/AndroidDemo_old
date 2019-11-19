@@ -66,11 +66,11 @@ class ImageFragment : BaseFragment<ImageViewModel>() {
         })
 
         viewModel.refreshState.observe(viewLifecycleOwner, Observer {
-            Timber.d("shop refreshState = $it")
+            Timber.d("[x1210x] image refreshState = $it")
         })
 
         viewModel.networkState.observe(viewLifecycleOwner, Observer {
-            Timber.d("shop networkState = $it")
+            Timber.d("[x1210x] image networkState = $it")
         })
     }
 }

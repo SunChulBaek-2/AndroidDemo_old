@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ssun.pe.kr.androiddemo.presentation
+package ssun.pe.kr.androiddemo.result
 
 enum class Status {
     RUNNING,

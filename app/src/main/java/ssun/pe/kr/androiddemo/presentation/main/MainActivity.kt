@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.ActivityMainBinding
 import ssun.pe.kr.androiddemo.presentation.BaseActivity
+import ssun.pe.kr.androiddemo.result.Result
 import timber.log.Timber
 
 class MainActivity : BaseActivity<MainViewModel>() {
@@ -60,8 +61,18 @@ class MainActivity : BaseActivity<MainViewModel>() {
     override fun setObservers() {
         super.setObservers()
 
-        viewModel.errata.observe(this, Observer {
-            Timber.d("errata = ${it.errata}")
+        viewModel.result.observe(this, Observer {
+            when (it) {
+                is Result.Success -> {
+                    Timber.d("[x1210x] get errata is success ${it.data.errata}")
+                }
+                is Result.Error -> {
+                    Timber.e("[x1210x] get errata is failed ${it.exception}")
+                }
+                is Result.Loading -> {
+                    Timber.d("[x1210x] get errata is loading")
+                }
+            }
         })
     }
 
