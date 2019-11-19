@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.FragmentShopBinding
 import ssun.pe.kr.androiddemo.presentation.BaseFragment
+import timber.log.Timber
 
 class ShopFragment : BaseFragment<ShopViewModel>() {
 
@@ -70,12 +71,12 @@ class ShopFragment : BaseFragment<ShopViewModel>() {
             mainViewModel.isRefreshing.value = false
         })
 
-        viewModel.refrefhState.observe(viewLifecycleOwner, Observer {
-            // TODO
+        viewModel.refreshState.observe(viewLifecycleOwner, Observer {
+            Timber.d("shop refreshState = $it")
         })
 
         viewModel.networkState.observe(viewLifecycleOwner, Observer {
-            // TODO
+            Timber.d("shop networkState = $it")
         })
     }
 }

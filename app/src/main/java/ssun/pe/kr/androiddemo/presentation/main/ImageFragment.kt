@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ssun.pe.kr.androiddemo.databinding.FragmentImageBinding
 import ssun.pe.kr.androiddemo.presentation.BaseFragment
+import timber.log.Timber
 
 class ImageFragment : BaseFragment<ImageViewModel>() {
 
@@ -64,12 +65,12 @@ class ImageFragment : BaseFragment<ImageViewModel>() {
             mainViewModel.isRefreshing.value = false
         })
 
-        viewModel.refrefhState.observe(viewLifecycleOwner, Observer {
-            // TODO
+        viewModel.refreshState.observe(viewLifecycleOwner, Observer {
+            Timber.d("shop refreshState = $it")
         })
 
         viewModel.networkState.observe(viewLifecycleOwner, Observer {
-            // TODO
+            Timber.d("shop networkState = $it")
         })
     }
 }

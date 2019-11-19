@@ -63,10 +63,6 @@ class MainActivity : BaseActivity<MainViewModel>() {
         viewModel.errata.observe(this, Observer {
             Timber.d("errata = ${it.errata}")
         })
-
-        viewModel.networkState.observe(this, Observer {
-            Timber.d("networkState = ${it.status.name}")
-        })
     }
 
     override fun onBackPressed() {

@@ -3,6 +3,7 @@ package ssun.pe.kr.androiddemo.domain.main
 import androidx.lifecycle.Transformations
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import ssun.pe.kr.androiddemo.data.main.SearchImageFactory
 import ssun.pe.kr.androiddemo.domain.UseCase
@@ -11,10 +12,11 @@ import ssun.pe.kr.androiddemo.presentation.Listing
 import java.util.concurrent.Executors
 
 class SearchImageUseCase(
-    private val scope: CoroutineScope
-) : UseCase<String, Listing<ImageItem>>() {
+    private val scope: CoroutineScope,
+    coroutineDispatcher: CoroutineDispatcher
+) : UseCase<String, Listing<ImageItem>>(coroutineDispatcher) {
 
-    override operator fun invoke(p: String): Listing<ImageItem> {
+    override fun execute(p: String): Listing<ImageItem> {
         val sourceFactory = SearchImageFactory(scope, p)
         val livePagedList = sourceFactory.toLiveData(
             config = PagedList.Config.Builder()

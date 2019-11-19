@@ -3,6 +3,7 @@ package ssun.pe.kr.androiddemo.data.main
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import ssun.pe.kr.androiddemo.domain.main.SearchRepository
@@ -31,7 +32,7 @@ class SearchImageDataSource(
         params: LoadInitialParams<Long>,
         callback: LoadInitialCallback<Long, ImageItem>
     ) {
-        scope.launch {
+        scope.launch(Dispatchers.IO) {
             // update network states.
             // we also provide an initial load state to the listeners so that the UI can know when the
             // very first list is loaded.
@@ -59,7 +60,7 @@ class SearchImageDataSource(
     }
 
     override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, ImageItem>) {
-        scope.launch {
+        scope.launch(Dispatchers.IO) {
             // set network value to loading.
             networkState.postValue(NetworkState.LOADING)
             try {
