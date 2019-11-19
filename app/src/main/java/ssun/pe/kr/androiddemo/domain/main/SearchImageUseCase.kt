@@ -14,7 +14,7 @@ class SearchImageUseCase(
     private val scope: CoroutineScope
 ) : UseCase<String, Listing<ImageItem>>() {
 
-    override fun execute(p: String): Listing<ImageItem> {
+    override operator fun invoke(p: String): Listing<ImageItem> {
         val sourceFactory = SearchImageFactory(scope, p)
         val livePagedList = sourceFactory.toLiveData(
             config = PagedList.Config.Builder()

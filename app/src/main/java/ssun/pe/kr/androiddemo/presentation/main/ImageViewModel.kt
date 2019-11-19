@@ -15,7 +15,7 @@ class ImageViewModel : BaseViewModel() {
     private val query = MutableLiveData<String>()
 
     private val result = map(query) { query ->
-        searchImageUseCase.execute(query)
+        searchImageUseCase(query)
     }
     val items = switchMap(result) { it.pagedList }
     val networkState = switchMap(result) { it.networkState }

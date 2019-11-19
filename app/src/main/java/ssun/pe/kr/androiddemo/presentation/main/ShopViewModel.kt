@@ -15,7 +15,7 @@ class ShopViewModel : BaseViewModel() {
     private val query = MutableLiveData<String>()
 
     private val result = map(query) { query ->
-        searchShopUseCase.execute(query)
+        searchShopUseCase(query)
     }
     val items = switchMap(result) { it.pagedList }
     val networkState = switchMap(result) { it.networkState }

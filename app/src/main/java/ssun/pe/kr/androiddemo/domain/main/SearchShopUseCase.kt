@@ -14,7 +14,7 @@ class SearchShopUseCase(
     private val scope: CoroutineScope
 ) : UseCase<String, Listing<ShopItem>>() {
 
-    override fun execute(p: String): Listing<ShopItem> {
+    override operator fun invoke(p: String): Listing<ShopItem> {
         val sourceFactory = SearchShopFactory(scope, p)
         val livePagedList = sourceFactory.toLiveData(
             config = PagedList.Config.Builder()

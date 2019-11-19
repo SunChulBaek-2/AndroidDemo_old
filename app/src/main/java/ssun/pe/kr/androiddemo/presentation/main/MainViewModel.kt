@@ -20,7 +20,7 @@ class MainViewModel : BaseViewModel() {
     val input = MutableLiveData<String>()
     val query = MutableLiveData<String>()
 
-    private val result: LiveData<Once<ErrataResult>> = map(input) { getErrataUseCase.execute(it) }
+    private val result: LiveData<Once<ErrataResult>> = map(input) { getErrataUseCase(it) }
     val errata: LiveData<ErrataResult> = switchMap(result) { it.result }
     val networkState: LiveData<NetworkState> = switchMap(result) { it.networkState }
 }

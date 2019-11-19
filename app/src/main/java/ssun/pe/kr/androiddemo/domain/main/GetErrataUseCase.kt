@@ -16,7 +16,7 @@ class GetErrataUseCase(
 
     private val repository: SearchRepository = DefaultSearchRepository()
 
-    override fun execute(p: String): Once<ErrataResult> {
+    override operator fun invoke(p: String): Once<ErrataResult> {
         val result = MutableLiveData<ErrataResult>()
         val networkState = MutableLiveData<NetworkState>()
         scope.launch {
