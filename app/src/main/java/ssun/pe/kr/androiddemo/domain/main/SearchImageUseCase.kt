@@ -15,7 +15,7 @@ class SearchImageUseCase(
 
     private lateinit var factory: SearchImageFactory
 
-    override fun execute(p: String): Flowable<PagedList<ImageItem>> =
+    override operator fun invoke(p: String): Flowable<PagedList<ImageItem>> =
         RxPagedListBuilder<Long, ImageItem>(
             SearchImageFactory(disposables, p).apply {
                 this@SearchImageUseCase.factory = this

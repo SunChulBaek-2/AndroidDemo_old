@@ -23,7 +23,7 @@ class ShopViewModel : BaseViewModel() {
 
     fun refresh() = searchShopUseCase.refresh()
 
-    fun search(query: String) = searchShopUseCase.execute(query)
+    fun search(query: String) = searchShopUseCase(query)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeBy(onNext = { items ->

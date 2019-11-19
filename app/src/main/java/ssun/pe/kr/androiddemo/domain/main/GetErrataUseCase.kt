@@ -9,5 +9,5 @@ class GetErrataUseCase : SingleUseCase<String, ErrataResult>() {
 
     private val repository: SearchRepository = DefaultSearchRepository()
 
-    override fun execute(p: String): Single<ErrataResult> = repository.errata(p)
+    override operator fun invoke(p: String): Single<ErrataResult> = repository.errata(p)
 }

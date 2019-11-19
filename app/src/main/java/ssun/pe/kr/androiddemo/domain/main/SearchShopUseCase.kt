@@ -15,7 +15,7 @@ class SearchShopUseCase(
 
     private lateinit var factory: SearchShopFactory
 
-    override fun execute(p: String): Flowable<PagedList<ShopItem>> =
+    override operator fun invoke(p: String): Flowable<PagedList<ShopItem>> =
         RxPagedListBuilder<Long, ShopItem>(
             SearchShopFactory(disposables, p).apply {
                 this@SearchShopUseCase.factory = this

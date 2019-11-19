@@ -24,7 +24,7 @@ class MainViewModel : BaseViewModel() {
     val errata = MutableLiveData<ErrataResult>()
     val networkState = MutableLiveData<NetworkState>()
 
-    fun getErrata(input: String?) = getErrataUseCase.execute(input ?: "")
+    fun getErrata(input: String?) = getErrataUseCase(input ?: "")
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeBy(onSuccess = {

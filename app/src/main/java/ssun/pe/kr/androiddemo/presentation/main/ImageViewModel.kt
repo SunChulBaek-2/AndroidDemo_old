@@ -23,7 +23,7 @@ class ImageViewModel : BaseViewModel() {
 
     fun refresh() = searchImageUseCase.refresh()
 
-    fun search(query: String) = searchImageUseCase.execute(query)
+    fun search(query: String) = searchImageUseCase(query)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeBy(onNext = { items ->
