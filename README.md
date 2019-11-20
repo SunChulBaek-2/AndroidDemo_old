@@ -21,4 +21,6 @@
     * [FlowUseCase](https://github.com/google/iosched/blob/adssched2019/shared/src/main/java/com/google/samples/apps/iosched/shared/domain/FlowUseCase.kt)
   * [Paging With Network Sample](https://github.com/android/architecture-components-samples/tree/master/PagingWithNetworkSample)
     * [Listing](https://github.com/android/architecture-components-samples/blob/master/PagingWithNetworkSample/lib/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/repository/Listing.kt)
+  * [Manage network states with the Paging library](https://medium.com/@stavro96/manage-network-states-with-the-paging-library-911445edc21e)
+    * [Paging With Network Sample](https://github.com/android/architecture-components-samples/tree/master/PagingWithNetworkSample)의 확장
   * [SwipeRefreshLayout + ViewPager](https://stackoverflow.com/questions/25978462/swiperefreshlayout-viewpager-limit-horizontal-scroll-only)
