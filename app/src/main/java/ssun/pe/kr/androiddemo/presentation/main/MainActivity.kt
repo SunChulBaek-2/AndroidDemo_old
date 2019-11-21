@@ -8,9 +8,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
+import ssun.pe.kr.androiddemo.EventBus
 import ssun.pe.kr.androiddemo.R
 import ssun.pe.kr.androiddemo.databinding.ActivityMainBinding
+import ssun.pe.kr.androiddemo.model.ErrataResult
 import ssun.pe.kr.androiddemo.presentation.BaseActivity
 import ssun.pe.kr.androiddemo.result.Result
 import timber.log.Timber
@@ -18,6 +21,22 @@ import timber.log.Timber
 class MainActivity : BaseActivity<MainViewModel>() {
 
     private lateinit var binding: ActivityMainBinding
+
+    init {
+        EventBus.receive<Result<ErrataResult>>(lifecycleScope) {
+            when (it) {
+                is Result.Success -> {
+                    Timber.d("[x1210x][BUS] get errata is success ${it.data.errata}")
+                }
+                is Result.Error -> {
+                    Timber.e("[x1210x][BUS] get errata is failed ${it.exception}")
+                }
+                is Result.Loading -> {
+                    Timber.d("[x1210x][BUS] get errata is loading")
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,17 +81,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
         super.setObservers()
 
         viewModel.result.observe(this, Observer {
-            when (it) {
-                is Result.Success -> {
-                    Timber.d("[x1210x] get errata is success ${it.data.errata}")
-                }
-                is Result.Error -> {
-                    Timber.e("[x1210x] get errata is failed ${it.exception}")
-                }
-                is Result.Loading -> {
-                    Timber.d("[x1210x] get errata is loading")
-                }
-            }
+            EventBus.send(it)
         })
     }
 
