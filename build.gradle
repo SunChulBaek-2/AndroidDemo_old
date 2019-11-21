@@ -24,7 +24,7 @@ buildscript {
         lifecycleVersion = '2.2.0-rc02'
         okhttpVersion = '4.2.2'
         pagingVersion = '2.1.0'
-        recyclerViewVersion = '1.1.0-rc01'
+        recyclerViewVersion = '1.1.0'
         retrofitVersion = '2.6.2'
         rxAndroidVersion = '2.1.1'
         rxJavaVersion = '2.2.14'
