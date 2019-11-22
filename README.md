@@ -4,7 +4,6 @@
     * [Paging With Network Sample](https://github.com/android/architecture-components-samples/tree/master/PagingWithNetworkSample)의 [Listing](https://github.com/android/architecture-components-samples/blob/master/PagingWithNetworkSample/lib/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/repository/Listing.kt) 클래스 사용
   * 단순 API 호출 : [오타변환](https://developers.naver.com/docs/search/errata/) API
     * [Once](https://github.com/x1210x/AndroidDemo/blob/master/app/src/main/java/ssun/pe/kr/androiddemo/presentation/Once.kt) (위 Listing 단순화 버전) 클래스 사용
-* Kotlin Coroutines를 사용한 EventBus
 * Architecture
   * [Data Binding](https://developer.android.com/topic/libraries/data-binding/)
   * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
