@@ -20,6 +20,11 @@ android {
         buildConfigField "String", "NaverClientSecret", "\"${System.getenv('NAVER_CLIENT_SECRET')}\""
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -75,8 +80,4 @@ dependencies {
 
     // Timber
     implementation "com.jakewharton.timber:timber:$timberVersion"
-    
-    // JAX-B dependencies for JDK 9+
-    implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
-    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
 }
