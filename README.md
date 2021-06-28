@@ -25,7 +25,6 @@
     * [Paging With Network Sample](https://github.com/android/architecture-components-samples/tree/master/PagingWithNetworkSample)의 확장
   * [SwipeRefreshLayout + ViewPager](https://stackoverflow.com/questions/25978462/swiperefreshlayout-viewpager-limit-horizontal-scroll-only)
 * Copyright
-
     Copyright 2014 Google Inc. All rights reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License");
