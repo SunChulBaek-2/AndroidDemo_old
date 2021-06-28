@@ -16,8 +16,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "NaverApiUrl", "\"https://openapi.naver.com/v1/search/\""
-        buildConfigField "String", "NaverClientId", "\"${System.getenv('NAVER_CLIENT_ID')}\""
-        buildConfigField "String", "NaverClientSecret", "\"${System.getenv('NAVER_CLIENT_SECRET')}\""
+        buildConfigField "String", "NaverClientId", "\"5nxREKDAavz0YsoK7QlW\""
+        buildConfigField "String", "NaverClientSecret", "\"cx6kMmMkER\""
     }
 
     buildTypes {
