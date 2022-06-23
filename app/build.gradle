@@ -63,7 +63,7 @@ dependencies {
     implementation "com.android.support:design:28.0.0"
 
     // Architecture Components
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-process:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion" // ViewModelScope
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion" // LifecycleScope
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion" // liveData

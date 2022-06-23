@@ -39,7 +39,7 @@ class DetailActivity : BaseActivity<DetailViewModel>() {
 
                 wvDetail.webViewClient = DetailWebViewClient(this@DetailActivity.viewModel)
                 wvDetail.settings.javaScriptEnabled = true
-                wvDetail.loadUrl(url)
+                wvDetail.loadUrl(url!!)
             }
         setObservers()
     }
